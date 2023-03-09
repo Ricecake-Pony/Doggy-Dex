@@ -1,0 +1,7 @@
+{
+    "name": "doggy-dex-top-lvl",
+    "description": "Project Outter package.json - Will be used for Deployment I believe",
+    "engines": 
+    { "node": "18.14.0" }
+
+}
