@@ -1,4 +1,6 @@
 {
+    // You don't want dependencies in the outter package.json, only scripts. 
+
     "name": "doggy-dex-top-lvl",
     "description": "Project Outter package.json - Will be used for Deployment I believe",
     "engines": 
