@@ -36,7 +36,10 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem "rack-cors"
 
-gem 'serializer'
+gem 'active_model_serializers'
+
+# pretty print Ruby objects to visualize their structure. Supports custom object formatting via plugins
+gem 'awesome_print', '~> 1.8'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

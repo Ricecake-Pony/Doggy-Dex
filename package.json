@@ -1,9 +1,14 @@
 {
-    // You don't want dependencies in the outter package.json, only scripts. 
+    
 
     "name": "doggy-dex-top-lvl",
     "description": "Project Outter package.json - Will be used for Deployment I believe",
     "engines": 
-    { "node": "18.14.0" }
+    { "node": "18.14.0" },
+
+    "scripts": {
+        "start": "npm start --prefix client"
+    }
+    
 
 }
