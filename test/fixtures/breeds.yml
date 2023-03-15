@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  bred_for: MyString
+  breed_group: MyString
+  lifespan: MyString
+  temperament: MyString
+  reference_image_id: MyString
+
+two:
+  name: MyString
+  bred_for: MyString
+  breed_group: MyString
+  lifespan: MyString
+  temperament: MyString
+  reference_image_id: MyString
