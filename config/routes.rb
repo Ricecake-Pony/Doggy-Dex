@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :breed_images
-  resources :breed_heights
-  resources :breed_weights
+  resources :breed_reviews
   resources :breeds
   resources :users
  

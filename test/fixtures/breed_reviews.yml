@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  breed: one
+  note: MyString
+  date: 2023-03-15
+
+two:
+  user: two
+  breed: two
+  note: MyString
+  date: 2023-03-15
