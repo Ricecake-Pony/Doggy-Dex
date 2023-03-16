@@ -11,8 +11,8 @@ DogProduct.destroy_all
 puts " Database Cleared!"
 
 puts "Creating Users..."
-User.create( username: "Trey", password: "1")
-User.create( username: "Kevin", password: "1")
+trey = User.create( username: "Trey", password: "1")
+kevin = User.create( username: "Kevin", password: "1")
 puts "Users Created!"
 # 172 dog pop boxer=45
 puts "Creating Breeds"
@@ -37,11 +37,10 @@ puts "Breeds Completed"
 
 puts "Creating Breed Reviews"
         BreedReview.create(note: "I really  dont like small dogs!!", user_id: rand(1..2), breed_id: rand(1..10)  )
-        BreedReview.create(note: "They're such clowns!", user_id: 1, breed_id: 55)
+        BreedReview.create(note: "They're such clowns!", user: trey, breed_id: 45)
 puts "Breed Reviews Complete"
 
 puts "Creating Dog Products"
-
         DogProduct.create(title: "QDAN Dog Toys Soccer Ball, Durable Dog Balls for Small & Medium Dogs-Blue&Red(6 inch)",   description: "Durable & Soft: Complying with the exact same standard as children's toys, the dog ball is made of premium PU that is the matiral of standard soccer ball so that it can be kicked and bounces as well. Note, our dog soccer medium balls is suitable for 20-40lbs dogs, HEAVY DOG PET needs to choose our Large one(Large size, fits 30-90lbs).
         Upgrade Interactive Dog Toy: Dog soccer ball with nylon tabs sewn evenly into the seams not only create an erratic bounce that dogs love to chase, but also make it easier for the dogs to fetch, toss, tug and retrieve. Dog paws are printed evenly on the dog toys ball to attract dogs attention. There's a longer strap for people to hold onto the ball, making it a great interactive dog toy to train your dogs.
         Ultra Bouncing Ball for Water Play: Adopted the lightweight, buoyant design, QDAN soccer ball for dogs can be played in the pool, lake and beach as well. The straps dog soccer ball is meant to keep your dog entertained, active and help human beings and dogs stay engaged.
@@ -63,7 +62,9 @@ puts "Creating Dog Products"
 puts "Dog Products Loaded"
 
 puts "Creating Dog Product Reviews"
-        DogProductReview.create(note: "My doggie loves it!", user_id: 2, dog_product_id: 1)
+        DogProductReview.create(note: "My doggie loves it!", user: kevin, dog_product_id: 1)
+        DogProductReview.create(note: "My doggie hates it", user_id: rand(1..2), dog_product_id: 2)
+        DogProductReview.create(note: "My dog never stops playing with it", user: trey, dog_product_id: 2)
 puts "Dog Product Reviews in the Webs!"
 
 puts "Seeding Completed!"
