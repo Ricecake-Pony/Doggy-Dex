@@ -12,7 +12,7 @@ puts "Creating Users..."
 User.create( username: "Trey", password: "1")
 User.create( username: "Kevin", password: "1")
 puts "Users Created!"
-# 220 dog pop
+# 172 dog pop
 puts "Creating Breeds"
 
         url = "https://api.thedogapi.com/v1/breeds"
@@ -32,6 +32,11 @@ puts "Creating Breeds"
         end
 
 puts "Breeds Completed"
+
+puts "Creating Breed Reviews"
+        BreedReview.create(note: "I really  dont like small dogs!!", user_id: rand(1..2), breed_id: rand(1..10)  )
+        BreedReview.create(note: "They're such clowns!", user_id: 1, breed_id: 55)
+puts "Breed Reviews Complete"
 
 puts "Seeding Completed!"
 
