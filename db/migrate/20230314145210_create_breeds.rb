@@ -11,10 +11,6 @@ class CreateBreeds < ActiveRecord::Migration[7.0]
       t.string :height_imperial
       t.string :height_metric
       t.string :image_url
-      # t.integer :image_height
-      # t.integer :image_width
-
-      t.timestamps
     end
   end
 end

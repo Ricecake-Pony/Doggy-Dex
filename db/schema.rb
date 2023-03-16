@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_15_230315) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_16_152004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_230315) do
     t.string "height_imperial"
     t.string "height_metric"
     t.string "image_url"
+  end
+
+  create_table "dog_product_reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "dog_product_id", null: false
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dog_product_id"], name: "index_dog_product_reviews_on_dog_product_id"
+    t.index ["user_id"], name: "index_dog_product_reviews_on_user_id"
+  end
+
+  create_table "dog_products", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.boolean "toy"
+    t.float "price"
+    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,10 +60,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_230315) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "breed_reviews", "breeds"
   add_foreign_key "breed_reviews", "users"
+  add_foreign_key "dog_product_reviews", "dog_products"
+  add_foreign_key "dog_product_reviews", "users"
 end
