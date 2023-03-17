@@ -1,7 +1,35 @@
 class BreedsController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response 
 
-    def create 
-        breed= Breed.create(name: "Yorkshire Terrier", bred_for: "Small vermin hunting", breed_group: "Toy", lifespan: "12 -16 years", temperament: "Bold, Independent, Confident, Intelligent, Courageous", weight_imperial:"4 - 7", weight_metric: "2 - 3", height_imperial: " 8 - 9", height_metric: "20 -23", image_url: "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg")
+
+    def index
+        render json: Breed.all
     end
+    
+    def show
+        dog_breed = Breed.find(params[:id])
+    
+        render json: dog_breed, status: :ok
+    end
+    
+    
+    # def create 
+        
+    # end
 
+
+        ###################################################################
+        private
+
+        # def breed_params
+        # params.permit()
+        # end
+
+        # def find_breed
+        #     Breed.find(params[:id])
+        # end
+
+        def render_not_found_response
+            render json: {error: "Dog Breed Not Found"}, status: :not_found
+        end
 end

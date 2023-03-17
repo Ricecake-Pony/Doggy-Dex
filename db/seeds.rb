@@ -8,6 +8,7 @@ User.destroy_all
 Breed.destroy_all
 BreedReview.destroy_all
 DogProduct.destroy_all
+DogProductReview.destroy_all
 puts " Database Cleared!"
 
 puts "Creating Users..."
@@ -21,6 +22,11 @@ puts "Creating Breeds"
         response = RestClient.get(url)
         parsed_list = JSON.parse(response)
         # debugger
+
+        parsed_list.each do |item| 
+        item.delete('reference_image_id')
+        end
+
         parsed_list.map do |dog| Breed.create(name: dog["name"],
         bred_for: dog["bred_for"],
         breed_group: dog["breed_group"], 
@@ -31,8 +37,14 @@ puts "Creating Breeds"
         height_metric: dog["height"]["metric"],
         temperament: dog["temperament"], 
         image_url: dog["image"]["url"])
+
+        
         end
 
+
+        # parsed_list.each do |item| 
+#         item.delete('reference_image_id')
+# end
 puts "Breeds Completed"
 
 puts "Creating Breed Reviews"
