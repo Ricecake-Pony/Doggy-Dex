@@ -23,9 +23,6 @@ puts "Creating Breeds"
         parsed_list = JSON.parse(response)
         # debugger
 
-        parsed_list.each do |item| 
-        item.delete('reference_image_id')
-        end
 
         parsed_list.map do |dog| Breed.create(name: dog["name"],
         bred_for: dog["bred_for"],
@@ -42,9 +39,7 @@ puts "Creating Breeds"
         end
 
 
-        # parsed_list.each do |item| 
-#         item.delete('reference_image_id')
-# end
+     
 puts "Breeds Completed"
 
 puts "Creating Breed Reviews"
