@@ -6,7 +6,7 @@ class DogProductsController < ApplicationController
     end
 
     def show
-        product = DogProduct.find!(params[:id])
+        product = DogProduct.find(params[:id])
 
         render json: product, status: :ok
     end
