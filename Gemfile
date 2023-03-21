@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.0"
 
-#The restClient gem is what will allow us to make our calls to the third-party API.
+#The restClient gem is what will allow us to make our calls to the third-party API/ fetch requests fromm the backend.
 gem 'rest-client'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
@@ -15,8 +15,14 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
-# 
+# Allows us to parse the fetch response into json that ruby can read
 gem 'json'
+
+# Allows encoding and decoding data
+gem 'jwt'
+
+#Using to keep important data/keys secure
+gem 'dotenv-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -42,6 +48,7 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem "rack-cors"
 
+#adds a serializer in ActiveRecord
 gem 'active_model_serializers'
 
 # pretty print Ruby objects to visualize their structure. Supports custom object formatting via plugins
