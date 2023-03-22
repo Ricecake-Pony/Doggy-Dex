@@ -9,5 +9,15 @@ class User < ApplicationRecord
 
     # This activates Bcrypt for our :password_digest
     has_secure_password
-    validates :username, presence: true, uniqueness: true
+    validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP}
+
+    PASSWORD_REQUIREMENTS = /\A
+        (?=.{8,}) # must be at least 8 characters long
+        (?=.*\d)  # must contain one number at least
+        (?=.*[a-z]) # must contain at least one lower case letter
+        (?=.*[A-Z]) # must contain at least one upper case letter
+        (?=.*[[:^alnum:]]) # must contain at least one symbol
+    /x
+
+    validates :password, presence: true, format: PASSWORD_REQUIREMENTS
 end

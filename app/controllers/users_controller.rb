@@ -1,30 +1,38 @@
 class UsersController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
+    before_action :authorize!, only: [:update]
+    
     def index
-        render json: User.all
+       render json: User.all
     end
+
 
     def show
         user = find_user
-        render json: user
+        render json: user, status: :ok
 
     end
 
     def create
     new_user = User.create!(user_params)
+    render json: new_user, status: :created
     end
 
+    def update
+        render json: { messages: ['yeah update!'], user: current_user}, status: :ok
+    end
+    
     ################################################################
     private
 
     def user_params
-        params.permit( :username, :password)
+        params.permit( :email, :password, :first_name, :image_url)
     end
 
-    # params.permit is allowing only the username and password to be permitted to be created/ only the ones we want to be used. This is also known as Strong params and stops mass assignment vulnerabilities by letting only these params through and nothing else.
+    # params.permit is allowing only the email and password to be permitted to be created/ only the ones we want to be used. This is also known as Strong params and stops mass assignment vulnerabilities by letting only these params through and nothing else.
 
-    # could also use params.require(:user).permit(:username, :password)
+    # could also use params.require(:user).permit(:email, :password)
 
 
     def find_user

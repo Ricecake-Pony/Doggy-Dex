@@ -12,8 +12,8 @@ DogProductReview.destroy_all
 puts " Database Cleared!"
 
 puts "Creating Users..."
-trey = User.create( username: "Trey", password: "1")
-kevin = User.create( username: "Kevin", password: "1")
+trey = User.create( first_name: "Trey", password: "Testing!1", email: "trey@gmail.com", image_url: "https://www.akc.org/wp-content/uploads/2017/11/Shikoku-standing-outdoors.jpg")
+kevin = User.create( first_name: "Kevin", password: "Testing!1", email: "kevin@gmail.com",image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcQbsBNUXW3tkRRjBg4oMOtMlMRfWzg-Drpg&usqp=CAU")
 puts "Users Created!"
 # 172 dog pop boxer=45
 puts "Creating Breeds"
@@ -43,7 +43,7 @@ puts "Creating Breeds"
 puts "Breeds Completed"
 
 puts "Creating Breed Reviews"
-        BreedReview.create(note: "I really  dont like small dogs!!", user_id: rand(1..2), breed_id: rand(1..10)  )
+        BreedReview.create(note: "I really  dont like small dogs!!", user: kevin, breed_id: rand(1..10)  )
         BreedReview.create(note: "They're such clowns!", user: trey, breed_id: 45)
 puts "Breed Reviews Complete"
 

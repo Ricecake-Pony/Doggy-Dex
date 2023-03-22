@@ -1,6 +1,6 @@
 class BreedReviewsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response 
-    
+    before_action :authorize!, only {:update, :create}
     def index
         render json: BreedReview.all
     end
@@ -17,6 +17,8 @@ class BreedReviewsController < ApplicationController
 
     def update
         breed_review = find_breed_review
+
+        if review.user.id == current_user.id
         breed_review.update!(breed_review_params)
         render json: breed_review, status: :ok
     end
