@@ -1,77 +1,118 @@
 import React, {useState, useEffect} from 'react';
 import Breeds from './Breeds/Breeds';
-
+import LoginModal from './LoginModal/LoginModal'
+import SignUp from './NavBar/SignUp';
 const baseURL= "http://localhost:3001/"
 const loginURL = baseURL + 'login'
+const signUpURL = baseURL + '/signup'
 
 function App() {
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [currentUser, setCurrentUser] = useState(null)
-
   
-  // useEffect( () => {
-  //   if (localStorage.uid)
-  //   fetch(loginURL, {
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //       'auth-token': localStorage.uid
-  //     }})
-  //     .then( r => r.json())
-  //     .then(setCurrentUser)
-  //   else
-  //   console.log("No user found.")
-  // }, [])
 
-    // const login = () => {
-    // fetch(loginURL, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-type': 'application/json',
-    //     Accept: 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     email: 'trey@gmail.com',
-    //     password: 'Testing!1'
-    //   })
-    // })
-    //   .then(r => r.json())
-    //   .then(user => {
-    //     localStorage.uid = user.uid
-    //     setCurrentUser(user.id)
-    //   })
-    // }
+  const loginInfo = {email, password}
 
-    const handleLogin= (e) => {
-      e.preventDefault()
-      fetch(loginURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      })
+  const resetForm = () => {
+    setEmail("")
+    setPassword("")
+  }
+  
+  useEffect( () => {
+    if (localStorage.uid)
+    fetch(loginURL, {
+      headers: {
+        'Content-type': 'application/json',
+        'auth-token': localStorage.uid
+      }})
       .then( r => r.json())
-      .then(console.log)
-    
-    console.log("I'm submitting!")
-      }
-      // )
+      .then(setCurrentUser)
+    else
+    console.log("No user found.")
+  }, [])
 
+    const login = (e) => {
+      e.preventDefault()
+    fetch(loginURL, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(loginInfo)
+    })
+      .then(r => r.json())
+      .then(user => {
+        if (!user.errors) {
+        localStorage.uid = user.uid
+        setCurrentUser(user.id)
+        } else
+        alert(user.errors)
+      })
+      
+      resetForm()
+    }
+
+    
     
       
     
 
-  return (
+    return (
     <div className="App">
-      <form onSubmit={handleLogin}>
-      <input type='email' value= {email} onChange={ (e) => setEmail(e.target.value)} placeholder='email@gmail.com'></input>
-      <input type= 'password' value= {password} onChange={ (e) => setPassword(e.target.value)} placeholder='password'></input>
+
+      <form onSubmit={login}>
+        <input 
+          type='email' 
+          value= {email} 
+          onChange={ (e) => setEmail(e.target.value)} 
+          placeholder='email@gmail.com'
+          />
+      <br/>
+        <input 
+          name='password' 
+          type='password' 
+          value= {password} 
+          onChange={ (e) => setPassword(e.target.value)} 
+          placeholder='password'
+          />
+          <br/>
       <button type= 'submit'>Login</button>
       </form>
+      <SignUp signUpURL = {signUpURL}/>
       <Breeds/>
     </div>
   );
 }
 
 export default App;
+
+// Prince has his onSubmit like so (loginInfo found on line 12):
+// onSubmit={ () => props.login({loginInfo})} and he uses the login function what's the difference between my handleLogin and his?
+// const handleLogin= (e) => {
+  //   // debugger use debugger to see if your values are actually being saved onSubmit
+  //   e.preventDefault()
+  //   if (localStorage.uid)
+  //   fetch(loginURL, {
+    //     method: "POST",
+    //     headers: {
+      //       "Content-Type": "application/json",
+      //        Accept: 'application/json'
+      //     },
+      //     body: JSON.stringify(loginInfo),
+      //   })
+      //   .then( r => r.json())
+      //   .then(user => {
+        //     if (!user.errors) {
+          //       localStorage.uid = user.uid
+          //       setCurrentUser(user.id)
+          //       console.log(user)
+          //       console.log(user.id)
+          //       console.log("I'm submitting!")
+          //     } else
+          //       user.errors.forEach(error => alert(error));
+          //   })
+          // }
+          
+  // )
