@@ -5,9 +5,8 @@ class ApplicationController < ActionController::API
         auth_token = request.headers['auth-token']
             if auth_token and auth_token != 'undefined'
                 token = JWT.decode(auth_token, ENV['JWT_TOKEN'])[0]
-
                 return User.find_by(id: token['user'])
-                #We're saying from the token find the user object and grab the user_id.
+                #We're saying from the token find the user object and grab the user_id from the decoded JWT token & it's corresponding user.
             else
                 return nil
             end

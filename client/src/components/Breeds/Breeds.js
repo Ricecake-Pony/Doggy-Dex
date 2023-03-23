@@ -7,7 +7,7 @@ export default function Breeds(){
     const [grabbedDogs, setGrabbedDogs] = useState([])
 
     function getBreeds(){
-        fetch("https://api.thedogapi.com/v1/breeds/2")
+        fetch("https://api.thedogapi.com/v1/breeds")
         .then( r => r.json())
         .then(data => console.log(data))
     }

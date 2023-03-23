@@ -1,23 +1,61 @@
 class SessionsController < ApplicationController
 
+    # Proper syntax of JWT:
+    # Encode (like encrypting): 
+    # 
+    # Can take 3 arguments, 
+    # 1: k/v pair(s), 
+    # 2: your secret key to unlock this token, it's generally a string.
+    # 3: third arg is what type of encryption but it defaults to HS256.
+    #                              1         2
+    # variable = JWT.encode({number:123}, 'nugget')
+    # Calling variable => encrypted data like so nj4324$VJKFNRED#432
+    #
+    # Decode (like decrypting) 2 arguments
+    # Arg 1: variable name
+    # Arg 2: the secret key ('nugget' in this example)
+    # JWT.decode(variable, 'nugget')
+    # The returned decoded data is in an array => [{'number'=>123}, {"alg"=> "HS256"}]
+    # good habit is to assign decoded data as a variable to grab specifically our encoded data only like below:
+    # token = JWT.decode(variable, 'nugget')[0]
+    # token => {"number"=>123}
+    # NOTE: JWT doesn't allow array access via hash/symbols, must use strings in bracket notation like so::
+    # token['number'] => 123
+
     def create 
 
         @user = User.find_by(email: params[:email])
         
         if @user&.authenticate(params[:password])
-
-            # This way gives us the token key and all of the user information. Is this so the session remembers all of the user's interactions?
+        
             # auth_token = JWT.encode({auth_token_id: @user.id, email: @user.email}, ENV['JWT_TOKEN'])
             # render json: {auth_token: auth_token, user: @user}, status: :created
 
-            # Line 14 is assigning a token as a variable.
-            # Line 15 is saying grab the user's id & their token to login
             logged_user = JWT.encode({user: @user.id},ENV['JWT_TOKEN'])
             user = { id: @user_id, uid: logged_user}
-            render json: user, status: :created
-            #how does it know what uid is? It understands the value of the obj, but how does it know the key, or does the key just become assigned because we're plugging in the value to the obj?
+            render json: user, status: :ok
+            
         else 
-            render json: { errors: "Invalid email or password"}, status: :unauthorized
+            cannot_login
         end
+    end
+
+    def auto_login
+        auth_token = request.headers['auth-token']
+        if auth_token and auth_token != 'undefined'
+            token = JWT.decode(auth_token, ENV['JWT_TOKEN'])[0]
+            user = User.find_by(id: token['user'])
+            render json: user.id, status: :ok
+        else
+            cannot_login
+        end
+    end
+
+    ##################################################################################################
+
+    private
+
+    def cannot_login
+        render json: { errors: "Invalid email or password"}, status: :unauthorized
     end
 end

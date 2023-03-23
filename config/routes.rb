@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   # Session custom routes
   post "/login", to: "sessions#create"
-  post "login", to: "sessions#login"
+  # post "login", to: "sessions#login"
+
+  # get "/auto_login", to: "sessions#auto_login"
  
 
   # Defines the root path route ("/")
