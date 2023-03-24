@@ -25,7 +25,6 @@ export default function SignUp( {signUpURL}){
         const submitProfile = (e) => {
             e.preventDefault()
             
-            console.log("I submitted a profile!")
             fetch(signUpURL,{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json',
@@ -37,7 +36,7 @@ export default function SignUp( {signUpURL}){
             .then(setUser)
 
             resetForm()
-
+            alert(user.errors)
         }
 
     return (
