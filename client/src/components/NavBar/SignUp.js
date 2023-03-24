@@ -1,26 +1,31 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 
-export default function( {signUpURL}){
+export default function SignUp( {signUpURL}){
+        const [user, setUser] = useState(null);
         const [email, setEmail] = useState('')
         const [firstName, setFirstName] = useState('')
         const [password, setPassword] = useState('')
         const [imageUrl, setImageUrl] = useState('')
 
         const signUpInfo = {
-            email,
-            firstName,
-            password,
-            imageUrl
+            email: email,
+            first_name: firstName,
+            password: password,
+            image_url: imageUrl
         }
+
 
             const resetForm = () => {
                 setEmail("")
                 setPassword("")
+                setFirstName("")
+                setImageUrl("")
               }
 
         const submitProfile = (e) => {
-            debugger
             e.preventDefault()
+            
+            console.log("I submitted a profile!")
             fetch(signUpURL,{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json',
@@ -29,37 +34,55 @@ export default function( {signUpURL}){
             body: JSON.stringify(signUpInfo)
             })
             .then(r => r.json())
-            .then(console.log)
-            console.log("I submitted a profile!")
+            .then(setUser)
+
+            resetForm()
+
         }
 
     return (
-        <form typeof="submit">
-            <input
-            placeholder="email"
-            type='email' 
-            onChange={(e) => setEmail(e.target.value)} 
-            value={email}
-            />
-            <input
-            placeholder="password"
-            type='password' 
-            onChange={(e) => setPassword(e.target.value)} 
-            value={password}
-            />
-            <input
-            placeholder="firstname"
-            type='text' 
-            onChange={(e) => setFirstName(e.target.value)} 
-            value={firstName}
-            />
-            <input
-            placeholder="imageurl"
-            type='text' 
-            onChange={(e) => setImageUrl(e.target.value)} 
-            value={imageUrl}
-            />
-            <button onSubmit={submitProfile}>Create Profile</button>
-        </form>
+        <>
+        <ul>Password Conditions
+            <li> Must be at least 8 characters long</li>
+            <li> Must contain one number at least (123)</li>
+            <li> Must contain at least one lower case letter (abc)</li>
+            <li> Must contain at least one upper case letter (ABC)</li>
+            <li> Must contain at least one symbol (!@#)</li>
+        </ul>
+            <form onSubmit={submitProfile}>
+                <input
+                id="email"
+                placeholder="email"
+                type='email' 
+                onChange={(e) => setEmail(e.target.value)} 
+                value={email}
+                />
+                <br/>
+                <input
+                id="password"
+                placeholder="password"
+                type='password' 
+                onChange={(e) => setPassword(e.target.value)} 
+                value={password}
+                />
+                <br/>
+                <input
+                id="firstName"
+                placeholder="First Name"
+                type='text' 
+                onChange={(e) => setFirstName(e.target.value)} 
+                value={firstName}
+                />
+                <br/>
+                <input
+                placeholder="imageUrl"
+                type='text' 
+                onChange={(e) => setImageUrl(e.target.value)} 
+                value={imageUrl}
+                />
+                <br/>
+                <button type="submit">Create Profile</button>
+            </form>
+        </>
     )
 }

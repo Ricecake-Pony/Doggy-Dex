@@ -1,23 +1,28 @@
 import React, {useState, useEffect} from 'react';
 import Breeds from './Breeds/Breeds';
+import { Route, Routes } from "react-router-dom"
 import LoginModal from './LoginModal/LoginModal'
 import SignUp from './NavBar/SignUp';
+import Home from './NavBar/Home';
+import NavBar from './NavBar/NavBar';
+
 const baseURL= "http://localhost:3001/"
-const loginURL = baseURL + 'login'
+const loginURL = baseURL + 'login';
 const signUpURL = baseURL + '/signup'
 
+
 function App() {
-  const [email, setEmail] = useState("")
-  const [password,setPassword] = useState("")
+  // const [email, setEmail] = useState("")
+  // const [password,setPassword] = useState("")
   const [currentUser, setCurrentUser] = useState(null)
   
 
-  const loginInfo = {email, password}
+  // const loginInfo = {email, password}
 
-  const resetForm = () => {
-    setEmail("")
-    setPassword("")
-  }
+  // const resetForm = () => {
+  //   setEmail("")
+  //   setPassword("")
+  // }
   
   useEffect( () => {
     if (localStorage.uid)
@@ -32,27 +37,26 @@ function App() {
     console.log("No user found.")
   }, [])
 
-    const login = (e) => {
-      e.preventDefault()
-    fetch(loginURL, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(loginInfo)
-    })
-      .then(r => r.json())
-      .then(user => {
-        if (!user.errors) {
-        localStorage.uid = user.uid
-        setCurrentUser(user.id)
-        } else
-        alert(user.errors)
-      })
-      
-      resetForm()
-    }
+  //   const login = (e) => {
+  //     e.preventDefault()
+  //   fetch(loginURL, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //       Accept: 'application/json'
+  //     },
+  //     body: JSON.stringify(loginInfo)
+  //   })
+  //     .then(r => r.json())
+  //     .then(user => {
+  //       if (!user.errors) {
+  //       localStorage.uid = user.uid
+  //       setCurrentUser(user.id)
+  //       } else
+  //       alert(user.errors)
+  //     })
+  //     resetForm()
+  //   }
 
     
     
@@ -61,8 +65,8 @@ function App() {
 
     return (
     <div className="App">
-
-      <form onSubmit={login}>
+      <NavBar/>
+      {/* <form onSubmit={login}>
         <input 
           type='email' 
           value= {email} 
@@ -79,9 +83,19 @@ function App() {
           />
           <br/>
       <button type= 'submit'>Login</button>
-      </form>
-      <SignUp signUpURL = {signUpURL}/>
+      </form> */}
+      {/* <SignUp signUpURL = {signUpURL}/> */}
       <Breeds/>
+      <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/login" element={<LoginModal loginUrl={loginURL} />} />
+          <Route
+            exact path ="/signup"
+            element={<SignUp signUpURL={signUpURL} />}
+            />
+      </Routes>
+
+
     </div>
   );
 }

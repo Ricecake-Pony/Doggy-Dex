@@ -14,10 +14,16 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     end
 
-    def create
-        new_user = User.create!(params[:user_params])
-        render json: new_user, status: :created
+    def signup
+        new_user = User.create!(user_params)
+        if new_user.valid?
+            new_uid_token = JWT.encode({user_id: new_user.id}, ENV['JWT_TOKEN'])      
+            render json: { new_user: UserSerializer.new(new_user)}, status: :created
+            # , new_uid_token: new_uid_token
+        else 
+            render json: {errors: new_user.errors.full_messages}, status: :not_acceptable
         end
+    end
 
     def update
         render json: { messages: ['yeah update!'], user: current_user}, status: :ok
@@ -27,12 +33,13 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     private
 
     def user_params
-        params.permit( :email, :password, :first_name, :image_url)
+        params.permit( :id, :email, :password, :first_name, :image_url)
     end
 
-    # params.permit is allowing only the listed properties to be permitted to be created/ only the ones we want to be used. This is also known as Strong params and stops mass assignment vulnerabilities by letting only these params through and nothing else.
-    # could also use params.require(:user).permit(:email, :password)
+ # params.permit is allowing only the username and password to be permitted to be created/ only the ones we want to be used. This is also known as Strong params and stops mass assignment vulnerabilities by letting only these params through and nothing else.
 
+    # could also use params.require(:user).permit(:username, :password) but the require will raise an error if you have the user key nested, in that case have the .permit include the user and it's params:
+    # params.permit(:email, :first_name, :image_url, :password, user: [:email, :first_name, :image_url])
 
     def find_user
         User.find(params[:id])

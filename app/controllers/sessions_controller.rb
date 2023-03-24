@@ -22,25 +22,20 @@ class SessionsController < ApplicationController
     # NOTE: JWT doesn't allow array access via hash/symbols, must use strings in bracket notation like so::
     # token['number'] => 123
 
-    def create 
-
+    def login 
         @user = User.find_by(email: params[:email])
-        
         if @user&.authenticate(params[:password])
-        
             # auth_token = JWT.encode({auth_token_id: @user.id, email: @user.email}, ENV['JWT_TOKEN'])
             # render json: {auth_token: auth_token, user: @user}, status: :created
-
             logged_user = JWT.encode({user: @user.id},ENV['JWT_TOKEN'])
-            user = { id: @user_id, uid: logged_user}
+            user = { user: UserSerializer.new(@user), uid: logged_user}
             render json: user, status: :ok
-            
         else 
             cannot_login
         end
     end
 
-    def auto_login
+    def existing_user
         auth_token = request.headers['auth-token']
         if auth_token and auth_token != 'undefined'
             token = JWT.decode(auth_token, ENV['JWT_TOKEN'])[0]

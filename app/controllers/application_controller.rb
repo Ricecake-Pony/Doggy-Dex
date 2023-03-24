@@ -18,16 +18,11 @@ class ApplicationController < ActionController::API
         end
     end
 
-
-
- 
-
     ##########################################################
     private
 
     def post_validation_error(validation_error)
-        render json: {errors: validation_error.record.errors.full_messages} 
-        # see if this is needed: ,status: :unprocessable_entity
+        render json: {errors: validation_error.record.errors.full_messages}, status: :unprocessable_entity
     end
 
 
