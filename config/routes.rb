@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # This is the manual way to type out the route for user index: get "/users", to: "users#index"
 
   post '/signup', to: 'users#signup'
+  get '/', to: 'application#welcome_home'
 
   # Session custom routes
   post "/login", to: "sessions#login"

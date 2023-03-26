@@ -6,14 +6,20 @@ export default function SignUp( {signUpURL}){
         const [firstName, setFirstName] = useState('')
         const [password, setPassword] = useState('')
         const [imageUrl, setImageUrl] = useState('')
+        const [dogImage, setDogImage] = useState(null)
+
+        useEffect(() => {
+            fetch('https://dog.ceo/api/breeds/image/random')
+            .then(r => r.json())
+            .then(dogData => setDogImage(dogData.message))
+        },[])
 
         const signUpInfo = {
             email: email,
             first_name: firstName,
             password: password,
-            image_url: imageUrl
+            image_url: dogImage
         }
-
 
             const resetForm = () => {
                 setEmail("")
@@ -24,7 +30,6 @@ export default function SignUp( {signUpURL}){
 
         const submitProfile = (e) => {
             e.preventDefault()
-            
             fetch(signUpURL,{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json',
@@ -73,12 +78,12 @@ export default function SignUp( {signUpURL}){
                 value={firstName}
                 />
                 <br/>
-                <input
+                {/* <input
                 placeholder="imageUrl"
                 type='text' 
                 onChange={(e) => setImageUrl(e.target.value)} 
                 value={imageUrl}
-                />
+                /> */}
                 <br/>
                 <button type="submit">Create Profile</button>
             </form>

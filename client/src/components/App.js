@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import Breeds from './Breeds/Breeds';
 import { Route, Routes } from "react-router-dom"
 import LoginModal from './LoginModal/LoginModal'
@@ -10,19 +10,21 @@ const baseURL= "http://localhost:3001/"
 const loginURL = baseURL + 'login';
 const signUpURL = baseURL + '/signup'
 
+export const UserContext = createContext();
 
 function App() {
-  // const [email, setEmail] = useState("")
-  // const [password,setPassword] = useState("")
+  const [email, setEmail] = useState("")
+  const [password,setPassword] = useState("")
   const [currentUser, setCurrentUser] = useState(null)
+  // const [loggedUser, setLoggedUser] = useState()
   
 
-  // const loginInfo = {email, password}
+  const loginInfo = {email, password}
 
-  // const resetForm = () => {
-  //   setEmail("")
-  //   setPassword("")
-  // }
+  const resetForm = () => {
+    setEmail("")
+    setPassword("")
+  }
   
   useEffect( () => {
     if (localStorage.uid)
@@ -37,65 +39,62 @@ function App() {
     console.log("No user found.")
   }, [])
 
-  //   const login = (e) => {
-  //     e.preventDefault()
-  //   fetch(loginURL, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //       Accept: 'application/json'
-  //     },
-  //     body: JSON.stringify(loginInfo)
-  //   })
-  //     .then(r => r.json())
-  //     .then(user => {
-  //       if (!user.errors) {
-  //       localStorage.uid = user.uid
-  //       setCurrentUser(user.id)
-  //       } else
-  //       alert(user.errors)
-  //     })
-  //     resetForm()
-  //   }
-
-    
-    
-      
-    
+    const login = (e) => {
+      e.preventDefault()
+    fetch(loginURL, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(loginInfo)
+    })
+      .then(r => r.json())
+      .then(user => {
+        if (!user.errors) {
+        
+        setCurrentUser(user)
+        console.log(currentUser)
+        } else
+        alert(user.errors)
+      })
+      resetForm()
+    }
 
     return (
     <div className="App">
-      <NavBar/>
-      {/* <form onSubmit={login}>
-        <input 
-          type='email' 
-          value= {email} 
-          onChange={ (e) => setEmail(e.target.value)} 
-          placeholder='email@gmail.com'
-          />
-      <br/>
-        <input 
-          name='password' 
-          type='password' 
-          value= {password} 
-          onChange={ (e) => setPassword(e.target.value)} 
-          placeholder='password'
-          />
-          <br/>
-      <button type= 'submit'>Login</button>
-      </form> */}
-      {/* <SignUp signUpURL = {signUpURL}/> */}
-      <Breeds/>
-      <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/login" element={<LoginModal loginUrl={loginURL} />} />
-          <Route
-            exact path ="/signup"
-            element={<SignUp signUpURL={signUpURL} />}
+      <UserContext.Provider value={currentUser }>
+        <NavBar/>
+        <form onSubmit={login}>
+          <input 
+            id='email'
+            type='email' 
+            value= {email} 
+            onChange={ (e) => setEmail(e.target.value)} 
+            placeholder='email@gmail.com'
             />
-      </Routes>
-
-
+        <br/>
+          <input 
+            id='password'
+            name='password' 
+            type='password' 
+            value= {password} 
+            onChange={ (e) => setPassword(e.target.value)} 
+            placeholder='password'
+            />
+            <br/>
+        <button type= 'submit'>Login</button>
+        </form>
+        <Breeds/>
+        <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/login" element={<LoginModal />} />
+            <Route
+              exact path ="/signup"
+              element={<SignUp signUpURL={signUpURL} />}
+              />
+        </Routes> 
+    </UserContext.Provider>
     </div>
   );
 }
