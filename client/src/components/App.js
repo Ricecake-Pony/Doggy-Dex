@@ -51,8 +51,9 @@ function App() {
       .then(user => {
         if (!user.errors) {
         localStorage.uid = user.uid
-        setCurrentUser(user)
-        console.log(currentUser)
+        // localStorage.setItem("uid", user.auth_token)
+        setCurrentUser(user.user)
+        console.log(user)
         } else
         alert(user.errors)
       })

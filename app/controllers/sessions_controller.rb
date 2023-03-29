@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
     def autologin
         # JWT params put the token on the key "_json"
         token = JWT.decode(params[:_json], ENV['JWT_TOKEN'])[0]
-        @user = User.find_by(id: token['user_id'])
+        @user = User.find_by(id: token['auth_token_id'])
         render json: @user, status: :accepted
     end
 
@@ -48,3 +48,5 @@ class SessionsController < ApplicationController
         render json: { errors: "Invalid email or password"}, status: :unauthorized
     end
 end
+
+# "_json": "eyJhbGciOiJIUzI1NiJ9.eyJhdXRoX3Rva2VuX2lkIjoyfQ.mnd0XKdObAtYAs1Q9lojufOVU73Nbnej1jnHgQ1zUu8"

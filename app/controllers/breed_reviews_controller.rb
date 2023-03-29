@@ -1,9 +1,11 @@
 class BreedReviewsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response 
-   
+    before_action :authorize!, only: [:update, :my_reviews, :create]
     def index
         render json: BreedReview.all
     end
+
+   
 
     def show
         breed_review = find_breed_review

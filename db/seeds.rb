@@ -45,6 +45,7 @@ puts "Breeds Completed"
 puts "Creating Breed Reviews"
         BreedReview.create(note: "I really  dont like small dogs!!", user: kevin, breed_id: rand(1..10)  )
         BreedReview.create(note: "They're such clowns!", user: trey, breed_id: 45)
+        BreedReview.create(note: "They're so energetic! I love boxers!", user: kevin, breed_id: 45)
 puts "Breed Reviews Complete"
 
 puts "Creating Dog Products"

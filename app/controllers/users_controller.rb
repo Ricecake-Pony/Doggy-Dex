@@ -25,6 +25,14 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
         end
     end
 
+    def my_reviews
+        debugger
+        reviews = find_breed_review
+        if reviews.user.id == current_user.id
+            render json: current_user.reviews, status: :ok
+        end
+    end
+
     def update
         render json: { messages: ['yeah update!'], user: current_user}, status: :ok
     end

@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#login"
   post "/autologin", to: "sessions#autologin"
 
-  # get "/auto_login", to: "sessions#auto_login"
+  # User custom routes
+  get "/users/my_reviews", to: "users#my_reviews"
+  patch "/users", to: 'users#update' 
  
 
   # Defines the root path route ("/")
