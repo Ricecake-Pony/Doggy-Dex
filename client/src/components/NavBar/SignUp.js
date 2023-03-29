@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 
-export default function SignUp( {signUpURL}){
+ function SignUp( {signUpURL}){
         const [user, setUser] = useState(null);
         const [email, setEmail] = useState('')
         const [firstName, setFirstName] = useState('')
@@ -90,3 +90,5 @@ export default function SignUp( {signUpURL}){
         </>
     )
 }
+
+export default SignUp;

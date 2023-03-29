@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   # Session custom routes
   post "/login", to: "sessions#login"
-  get "/login", to: "sessions#existing_user"
+  post "/autologin", to: "sessions#autologin"
 
   # get "/auto_login", to: "sessions#auto_login"
  

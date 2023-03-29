@@ -1,5 +1,5 @@
-import React, { useContext} from "react";
-import { UserContext } from "../App";
+import React, { useEffect, useContext} from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function Home(){
     const user  = useContext(UserContext)
@@ -16,8 +16,8 @@ export default function Home(){
 
     return(
         <>
-        <h3>{ user && user.user && ( `Welcome Home ${user.user.first_name}`) } </h3>
-        <img src={user && user.user.image_url} alt='random dog image' style={{height: 'auto', width: '300px' }}/>
+        {/* <h3>{ user && user.user && ( `Welcome Home ${user.user.first_name}`) } </h3> */}
+        {/* <img src={user && user.user.image_url} alt='random dog image' style={{height: 'auto', width: '300px' }}/> */}
         </>
     )
 }

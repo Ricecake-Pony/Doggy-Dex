@@ -1,7 +1,7 @@
-import React, {useState, useEffect, createContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import Breeds from './Breeds/Breeds';
 import { Route, Routes } from "react-router-dom"
-import LoginModal from './LoginModal/LoginModal'
+// import LoginModal from './LoginModal/LoginModal'
 import SignUp from './NavBar/SignUp';
 import Home from './NavBar/Home';
 import NavBar from './NavBar/NavBar';
@@ -10,13 +10,11 @@ const baseURL= "http://localhost:3001/"
 const loginURL = baseURL + 'login';
 const signUpURL = baseURL + '/signup'
 
-export const UserContext = createContext();
-
 function App() {
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [currentUser, setCurrentUser] = useState(null)
-  // const [loggedUser, setLoggedUser] = useState()
+
   
 
   const loginInfo = {email, password}
@@ -26,18 +24,18 @@ function App() {
     setPassword("")
   }
   
-  useEffect( () => {
-    if (localStorage.uid)
-    fetch(loginURL, {
-      headers: {
-        'Content-type': 'application/json',
-        'auth-token': localStorage.uid
-      }})
-      .then( r => r.json())
-      .then(setCurrentUser)
-    else
-    console.log("No user found.")
-  }, [])
+  // useEffect( () => {
+  //   if (localStorage.uid)
+  //   fetch(loginURL, {
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //       'auth-token': localStorage.uid
+  //     }})
+  //     .then( r => r.json())
+  //     .then(setCurrentUser)
+  //   else
+  //   console.log("No user found.")
+  // }, [])
 
     const login = (e) => {
       e.preventDefault()
@@ -52,7 +50,7 @@ function App() {
       .then(r => r.json())
       .then(user => {
         if (!user.errors) {
-        
+        localStorage.uid = user.uid
         setCurrentUser(user)
         console.log(currentUser)
         } else
@@ -63,7 +61,6 @@ function App() {
 
     return (
     <div className="App">
-      <UserContext.Provider value={currentUser }>
         <NavBar/>
         <form onSubmit={login}>
           <input 
@@ -88,13 +85,12 @@ function App() {
         <Breeds/>
         <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/login" element={<LoginModal />} />
+        {/* <Route exact path="/login" element={<LoginModal />} /> */}
             <Route
               exact path ="/signup"
               element={<SignUp signUpURL={signUpURL} />}
               />
         </Routes> 
-    </UserContext.Provider>
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function Breeds(){
         <form onSubmit= {handleSubmit}>
 
         </form>
-        <button onClick={() => getBreeds()  }>Return Breeds</button>
+        <button onClick={() => getBreeds()  }>Return Dog Breeds</button>
         </>
     )
 }

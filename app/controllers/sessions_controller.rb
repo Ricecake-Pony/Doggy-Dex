@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+#lsof -i :3000 lists all processes running on that server
     # Proper syntax of JWT:
     # Encode (like encrypting): 
     # 
@@ -19,31 +19,25 @@ class SessionsController < ApplicationController
     # good habit is to assign decoded data as a variable to grab specifically our encoded data only like below:
     # token = JWT.decode(variable, 'nugget')[0]
     # token => {"number"=>123}
-    # NOTE: JWT doesn't allow array access via hash/symbols, must use strings in bracket notation like so::
+    # NOTE: JWT doesn't allow array access via hash/symbols, must use strings in bracket notation like so:
     # token['number'] => 123
 
     def login 
         @user = User.find_by(email: params[:email])
         if @user&.authenticate(params[:password])
-            # auth_token = JWT.encode({auth_token_id: @user.id, email: @user.email}, ENV['JWT_TOKEN'])
-            # render json: {auth_token: auth_token, user: @user}, status: :created
-            logged_user = JWT.encode({user: @user.id},ENV['JWT_TOKEN'])
-            user = { user: UserSerializer.new(@user), uid: logged_user}
-            render json: user, status: :ok
+            auth_token = JWT.encode({auth_token_id: @user.id} ,ENV['JWT_TOKEN'])
+            user = { user: UserSerializer.new(@user), uid: auth_token}
+            render json: {uid: auth_token,  user: @user, status: :ok}
         else 
             cannot_login
         end
     end
 
-    def existing_user
-        auth_token = request.headers['auth-token']
-        if auth_token and auth_token != 'undefined'
-            token = JWT.decode(auth_token, ENV['JWT_TOKEN'])[0]
-            user = User.find_by(id: token['user'])
-            render json: user.id, status: :ok
-        else
-            cannot_login
-        end
+    def autologin
+        # JWT params put the token on the key "_json"
+        token = JWT.decode(params[:_json], ENV['JWT_TOKEN'])[0]
+        @user = User.find_by(id: token['user_id'])
+        render json: @user, status: :accepted
     end
 
     ##################################################################################################

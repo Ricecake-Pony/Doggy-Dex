@@ -2,8 +2,8 @@ class ApplicationController < ActionController::API
     rescue_from ActiveRecord::RecordInvalid, with: :post_validation_error
 
     def current_user
-        auth_token = request.headers['auth-token']
-            if auth_token and auth_token != 'undefined'
+        auth_token = request.headers['uid']
+            if auth_token && auth_token != 'undefined'
                 token = JWT.decode(auth_token, ENV['JWT_TOKEN'])[0]
                 return User.find_by(id: token['user'])
                 #We're saying from the token find the user object and grab the user_id from the decoded JWT token & it's corresponding user.
