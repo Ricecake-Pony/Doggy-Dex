@@ -1,4 +1,4 @@
-import {Link, NavLink} from "react-router-dom"
+import { NavLink} from "react-router-dom"
 import * as React from 'react';
 import { useEffect, useContext } from "react";
 import AppBar from '@mui/material/AppBar';
@@ -7,19 +7,17 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import PetIcon from '@mui/icons-material/Pets';
 import { UserContext } from "../../contexts/UserContext";
+import styled from "@emotion/styled";
 
 // const pages = [ 'Home', 'breeds','dog_products'];
 // const settings = ['my_profile','Signup', 'Logout'];
 
-export default function NavBar() {
+export default function NavBar({logOut}) {
     const {currentUser, setCurrentUser} = useContext(UserContext)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -29,7 +27,6 @@ export default function NavBar() {
          const handleClose = () => {
            setAnchorEl(null);
          };
-
 
     useEffect(() => {
         console.log(currentUser)
@@ -47,8 +44,8 @@ export default function NavBar() {
             <NavLink className="link" to="/breeds">
                 Dog Breeds
             </NavLink>
-            <NavLink className="link" to="/login">
-                Login
+            <NavLink className="link" to="/dog_products">
+                Dog Products
             </NavLink>
           </Typography>
           <Tooltip title="Open settings">
@@ -72,9 +69,9 @@ export default function NavBar() {
                         vertical: 'top',
                         horizontal: 'left',
                       }}>
-            <NavLink to="/my_profile"> <MenuItem onClick={handleClose}>Profile</MenuItem></NavLink>
-            <NavLink to="/"> <MenuItem onClick={handleClose}>Logout</MenuItem></NavLink>
-            <NavLink to="/signup"> <MenuItem onClick={handleClose}>SignUp</MenuItem></NavLink>
+            <NavLink className="link" to="/my_profile"> <MenuItem onClick={handleClose}>My Profile</MenuItem></NavLink>
+            <NavLink className="link" to="/"> <MenuItem onClick={logOut}>Logout</MenuItem></NavLink>
+            <NavLink className="link" to="/signup"> <MenuItem onClick={handleClose}>SignUp</MenuItem></NavLink>
           </Menu>
         </Toolbar>
       </AppBar>

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react"
+import { useNavigate } from "react-router-dom";
 
  function SignUp( {signUpURL}){
         const [user, setUser] = useState(null);
@@ -7,6 +8,8 @@ import React, {useEffect, useState} from "react"
         const [password, setPassword] = useState('')
         const [imageUrl, setImageUrl] = useState('')
         const [dogImage, setDogImage] = useState(null)
+        const [errors, setErrors] = useState()
+        let navigate = useNavigate();
 
         useEffect(() => {
             fetch('https://dog.ceo/api/breeds/image/random')
@@ -37,13 +40,36 @@ import React, {useEffect, useState} from "react"
             },
             body: JSON.stringify(signUpInfo)
             })
-            .then(r => r.json())
-            .then(setUser)
+            .then(r => {
+                if (r.ok) {
+                  r.json().then(data => {
+                    setUser(data)
+                    resetForm()
+                    alert('Sign Up Completed Successfully. Please Login')
+                  })
+                  navigate("/")
+                } else {
+                    r.json().then(errors => setErrors(errors),
+                  alert("An Error Ocurred, Type: 422 (Unprocessable Entity)")
+                )}
+              })
+          }
 
-            resetForm()
-            alert(user.errors)
-        }
 
+            // .then(r => {
+            //     if (r.ok){
+            //     r.json().then(createdUser => {
+            //         setUser(createdUser)) }
+            //         resetForm()
+            //     alert("Sign Up Completed Successfully. Please Login")
+            //     )}
+            //     } else {
+            // alert('Error: Sign Up Failed')
+            //     }
+            
+            // .catch(error => {
+            //     alert(`Error: ${error.message}`)
+            // })
     return (
         <>
         <ul>Password Conditions
