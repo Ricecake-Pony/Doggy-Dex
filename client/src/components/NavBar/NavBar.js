@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import PetIcon from '@mui/icons-material/Pets';
 import { UserContext } from "../../contexts/UserContext";
+import LoginModal from "./LoginModal";
 import styled from "@emotion/styled";
 
 // const pages = [ 'Home', 'breeds','dog_products'];
@@ -28,9 +29,6 @@ export default function NavBar({logOut}) {
            setAnchorEl(null);
          };
 
-    useEffect(() => {
-        console.log(currentUser)
-    }, [])
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -38,6 +36,7 @@ export default function NavBar({logOut}) {
         <Toolbar>
             <PetIcon className="nav-icon"/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            
             <NavLink className="link" to="/">
                 Home
             </NavLink>
@@ -48,7 +47,8 @@ export default function NavBar({logOut}) {
                 Dog Products
             </NavLink>
           </Typography>
-          <Tooltip title="Open settings">
+          { localStorage.uid ? 
+              <Tooltip title="Open settings">
              <IconButton aria-controls={open ? 'demo-positioned-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
@@ -56,19 +56,20 @@ export default function NavBar({logOut}) {
                 { currentUser ? (  <Avatar alt={currentUser.first_name} src={currentUser.image_url}/>) : (null) }
              </IconButton>
           </Tooltip>
+           : <LoginModal/> }
           <Menu
            className="nav-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                     anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}>
+           anchorEl={anchorEl}
+           open={open}
+           onClose={handleClose}
+           anchorOrigin={{
+               vertical: 'top',
+               horizontal: 'left',
+            }}
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+            }}>
             <NavLink className="link" to="/my_profile"> <MenuItem onClick={handleClose}>My Profile</MenuItem></NavLink>
             <NavLink className="link" to="/"> <MenuItem onClick={logOut}>Logout</MenuItem></NavLink>
             <NavLink className="link" to="/signup"> <MenuItem onClick={handleClose}>SignUp</MenuItem></NavLink>
