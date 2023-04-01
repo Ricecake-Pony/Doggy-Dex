@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post "/autologin", to: "sessions#autologin"
 
   # User custom routes
-  get "/users/my_reviews", to: "users#my_reviews"
+  get "/users/:id/my_profile", to: "users#my_breed_reviews"
   patch "/users", to: 'users#update' 
  
 

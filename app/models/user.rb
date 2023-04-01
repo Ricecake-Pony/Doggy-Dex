@@ -7,9 +7,12 @@ class User < ApplicationRecord
 
     def reviewed_breeds
         breed_reviews.map{ |review| review.breed}
+    end
 
+    def reviewed_products
+        dog_products.map{ |review| review.dog_product}
+    end
     
-
     # This activates Bcrypt for our :password_digest
     has_secure_password
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP}

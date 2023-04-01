@@ -5,10 +5,12 @@ import { Route, Routes } from "react-router-dom"
 import SignUp from './NavBar/SignUp';
 import Home from './NavBar/Home';
 import NavBar from './NavBar/NavBar';
+import BreedReviews from './Reviews/BreedReviews';
 
 const baseURL= "http://localhost:3001/"
 const loginURL = baseURL + 'login';
-const signUpURL = baseURL + '/signup'
+const signUpURL = baseURL + '/signup';
+const myProfileURL = baseURL + '/my_profile';
 
 function App() {
   const [email, setEmail] = useState("")
@@ -23,19 +25,6 @@ function App() {
     setEmail("")
     setPassword("")
   }
-  
-  // useEffect( () => {
-  //   if (localStorage.uid)
-  //   fetch(loginURL, {
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //       'auth-token': localStorage.uid
-  //     }})
-  //     .then( r => r.json())
-  //     .then(setCurrentUser)
-  //   else
-  //   console.log("No user found.")
-  // }, [])
 
     const login = (e) => {
       e.preventDefault()
@@ -51,7 +40,6 @@ function App() {
       .then(user => {
         if (!user.errors) {
         localStorage.uid = user.uid
-        // localStorage.setItem("uid", user.auth_token)
         setCurrentUser(user.user)
         console.log(user)
         } else
@@ -85,11 +73,18 @@ function App() {
         </form>
         <Breeds/>
         <Routes>
-        <Route exact path="/" element={<Home />} />
+          <Route 
+            exact path="/" 
+            element={<Home />} 
+          />
         {/* <Route exact path="/login" element={<LoginModal />} /> */}
             <Route
               exact path ="/signup"
-              element={<SignUp signUpURL={signUpURL} />}
+              element={<SignUp signUpURL = {signUpURL} />}
+              />
+              <Route
+              exact path ="/my_profile"
+              element={<BreedReviews myProfileURL = {myProfileURL} />}
               />
         </Routes> 
     </div>

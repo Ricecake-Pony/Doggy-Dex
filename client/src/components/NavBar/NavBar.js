@@ -13,6 +13,9 @@ return(
     <NavLink className="link" to="/login">
         Login
     </NavLink>
+    <NavLink className="link" to="/my_profile">
+        My Profile
+    </NavLink>
     </>
     
 )

@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
-    before_action :authorize!
+    before_action :authorize!, except: [:signup]
     
+    #Take index out before deployment
     def index
        render json: User.all
     end
@@ -11,7 +12,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     def show
         user = find_user
         render json: user, status: :ok
-
     end
 
     def signup
@@ -25,12 +25,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
         end
     end
 
-    def my_reviews
-        debugger
-        reviews = find_breed_review
-        if reviews.user.id == current_user.id
-            render json: current_user.reviews, status: :ok
-        end
+    def my_breed_reviews
+        render json: current_user.reviewed_breeds, status: :ok
     end
 
     def update

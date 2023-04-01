@@ -1,7 +1,7 @@
 import React, {useEffect, useState, createContext} from "react";
 
 const UserContext = createContext()
-const baseURL= "http://localhost:3001/"
+// const baseURL= "http://localhost:3001/"
 // const loginURL = baseURL + 'login';
 
 const UserProvider = ({children}) => {

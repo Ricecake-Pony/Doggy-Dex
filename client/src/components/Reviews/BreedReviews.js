@@ -1,13 +1,34 @@
-import React, {useContext} from "react";
+import React, {useEffect, useContext} from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function BreedReviews(){
-    if (localStorage.uid)
-    fetch('http://localhost:3001/users/my_reviews', {
-        headers: {
-            'Content-type' : 'application/json',
-            'uid' : localStorage.uid
-        },
+    const {currentUser, setCurrentUser} = useContext(UserContext)
+
+    useEffect(() => {
+        console.log(currentUser)
     })
-    .then( r => r.json())
-    .then(dogBreeds => console.log(dogBreeds))
+
+    function getUserBreedReviews(){
+    if (currentUser) 
+    console.log(currentUser)
+    {
+    fetch(`http://localhost:3001/users/${currentUser.id}/my_profile`,{
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            uid: localStorage.uid
+        }
+    })
+    .then( r => {
+        if (r.ok){
+            r.json().then(dogBreedReviews => console.log(dogBreedReviews))
+         }
+        })
+      }
+     }
+    
+    return(
+
+        <button onClick={ getUserBreedReviews}> Hit me for your Dog Reviews</button>
+    )
 }
