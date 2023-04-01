@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import Breeds from './Breeds/Breeds';
 import { Route, Routes } from "react-router-dom"
 // import LoginModal from './LoginModal/LoginModal'
-import SignUp from './NavBar/SignUp';
-import Home from './NavBar/Home';
+import Breeds from './Breeds/Breeds';
 import NavBar from './NavBar/NavBar';
-import BreedReviews from './Reviews/BreedReviews';
+import SignUp from './NavBar/SignUp';
+import Home from './HomePage/Home';
+import UserProfile from './NavBar/UserProfile';
+
 
 const baseURL= "http://localhost:3001/"
 const loginURL = baseURL + 'login';
-const signUpURL = baseURL + '/signup';
-const myProfileURL = baseURL + '/my_profile';
+const signUpURL = baseURL + 'signup';
+const myProfileURL = baseURL + 'my_profile';
+const breedsURL = baseURL + 'breeds';
 
 function App() {
   const [email, setEmail] = useState("")
@@ -73,19 +75,11 @@ function App() {
         </form>
         <Breeds/>
         <Routes>
-          <Route 
-            exact path="/" 
-            element={<Home />} 
-          />
+          <Route exact path="/" element={<Home />} />
         {/* <Route exact path="/login" element={<LoginModal />} /> */}
-            <Route
-              exact path ="/signup"
-              element={<SignUp signUpURL = {signUpURL} />}
-              />
-              <Route
-              exact path ="/my_profile"
-              element={<BreedReviews myProfileURL = {myProfileURL} />}
-              />
+          <Route exact path ="Signup" element={<SignUp signUpURL = {signUpURL} />} />
+          <Route exact path ="my_profile" element={<UserProfile myProfileURL = {myProfileURL} />} />
+          <Route exact path ="breeds" element={<Breeds breedsURL = {breedsURL} />} />
         </Routes> 
     </div>
   );
