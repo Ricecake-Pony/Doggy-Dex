@@ -50,6 +50,7 @@ export default function LoginModal() {
       localStorage.uid = user.uid
       setCurrentUser(user.user)
       console.log(user.user)
+      navigate('/breeds')
       } else
       alert(user.errors)
     })

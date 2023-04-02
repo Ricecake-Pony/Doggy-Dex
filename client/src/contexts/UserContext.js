@@ -6,11 +6,11 @@ const UserContext = createContext()
 
 const UserProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null)
-
+    let loggedUser = currentUser
     
     useEffect( () => {
-        if (localStorage.uid)
-    fetch('http://localhost:3001/autologin', {
+      if (localStorage.uid)
+      fetch('http://localhost:3001/autologin', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -30,7 +30,7 @@ const UserProvider = ({children}) => {
     console.log('No User Found');
     
     };
-    },[])
+    },[loggedUser])
 
 return ( <UserContext.Provider value={{currentUser, setCurrentUser}}>
     {children}
