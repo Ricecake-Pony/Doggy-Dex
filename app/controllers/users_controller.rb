@@ -8,7 +8,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
        render json: User.all
     end
 
-
     def show
         user = find_user
         render json: user, status: :ok

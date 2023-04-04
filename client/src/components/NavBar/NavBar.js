@@ -1,22 +1,11 @@
 import { NavLink} from "react-router-dom"
 import * as React from 'react';
 import { useEffect, useContext } from "react";
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Avatar, Tooltip, MenuItem } from '@mui/material';
 import PetIcon from '@mui/icons-material/Pets';
 import { UserContext } from "../../contexts/UserContext";
 import LoginModal from "./LoginModal";
 import styled from "@emotion/styled";
-
-// const pages = [ 'Home', 'breeds','dog_products'];
-// const settings = ['my_profile','Signup', 'Logout'];
 
 export default function NavBar({logOut}) {
     const {currentUser, setCurrentUser} = useContext(UserContext)
@@ -73,7 +62,6 @@ export default function NavBar({logOut}) {
             }}>
             <NavLink className="link" to="/my_profile"> <MenuItem onClick={handleClose}>My Profile</MenuItem></NavLink>
             <NavLink className="link" to="/"> <MenuItem onClick={logOut}>Logout</MenuItem></NavLink>
-            
           </Menu>
         </Toolbar>
       </AppBar>

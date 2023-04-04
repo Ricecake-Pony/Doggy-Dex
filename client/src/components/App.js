@@ -9,7 +9,6 @@ import styled from "@emotion/styled";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 
-
 const baseURL= "http://localhost:3001/"
 const signUpURL = baseURL + 'signup';
 const myProfileURL = baseURL + 'my_profile';
@@ -20,8 +19,6 @@ function App() {
 
   const {currentUser, setCurrentUser} = useContext(UserContext)
   const navigate = useNavigate()
-  
-
 
     const logOut = () => {
       
