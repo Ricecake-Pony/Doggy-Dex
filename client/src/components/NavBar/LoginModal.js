@@ -86,12 +86,11 @@ export default function LoginModal() {
             placeholder='password'
             />
             <br/>
-        <button type= 'submit'></button>
+        <button type= 'submit' onClick={handleClose}>Login</button>
         </form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Login</Button>
         </DialogActions>
       </Dialog>
     </div>
