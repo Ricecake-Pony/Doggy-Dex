@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useContext} from 'react';
 import { Route, Routes } from "react-router-dom"
 import Breeds from './Breeds/Breeds';
 import NavBar from './NavBar/NavBar';
@@ -7,6 +7,7 @@ import Home from './HomePage/Home';
 import UserProfile from './NavBar/UserProfile';
 import styled from "@emotion/styled";
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContext';
 
 
 const baseURL= "http://localhost:3001/"
@@ -17,7 +18,7 @@ const productsURL = baseURL + 'dog_products'
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState(null)
+  const {currentUser, setCurrentUser} = useContext(UserContext)
   const navigate = useNavigate()
   
 
@@ -26,7 +27,7 @@ function App() {
       
       localStorage.removeItem('uid')
       navigate('/')
-      setCurrentUser(null)
+      setCurrentUser()
     }
 
     return (

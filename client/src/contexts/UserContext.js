@@ -6,7 +6,6 @@ const UserContext = createContext()
 
 const UserProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null)
-    let loggedUser = currentUser
     
     useEffect( () => {
       if (localStorage.uid)
@@ -22,15 +21,15 @@ const UserProvider = ({children}) => {
         res.json()
         .then(user => {
           setCurrentUser(user)
+          console.log(user)
           console.log("User Found:", localStorage.uid)
         }
       )}
     })
    else {
     console.log('No User Found');
-    
     };
-    },[loggedUser])
+    },[])
 
 return ( <UserContext.Provider value={{currentUser, setCurrentUser}}>
     {children}

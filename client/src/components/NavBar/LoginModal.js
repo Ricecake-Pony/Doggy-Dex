@@ -8,6 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 
 const baseURL= "http://localhost:3001/"
 const loginURL = baseURL + 'login';
@@ -16,7 +17,7 @@ export default function LoginModal() {
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
-  const [currentUser, setCurrentUser] = useState(null)
+  const {currentUser, setCurrentUser} = useContext(UserContext)
   const navigate = useNavigate()
   
   const resetForm = () => {
@@ -47,9 +48,9 @@ export default function LoginModal() {
     .then(r => r.json())
     .then(user => {
       if (!user.errors) {
-      localStorage.uid = user.uid
+      localStorage.setItem('uid', user.uid)
       setCurrentUser(user.user)
-      console.log(user.user)
+      console.log(user)
       navigate('/breeds')
       } else
       alert(user.errors)

@@ -5,10 +5,6 @@ import { UserContext } from "../../contexts/UserContext";
 export default function UserProfile () {
     const {currentUser, setCurrentUser} = useContext(UserContext)
 
-    useEffect(() => {
-        console.log(currentUser)
-    })
-
     function getUserBreedReviews(){
     if (currentUser) 
     console.log(currentUser)

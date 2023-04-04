@@ -28,7 +28,7 @@ export default function NavBar({logOut}) {
          const handleClose = () => {
            setAnchorEl(null);
          };
-
+          console.log(currentUser)
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -48,7 +48,7 @@ export default function NavBar({logOut}) {
             </NavLink>
             <NavLink className="link" to="/signup">SignUp</NavLink>
           </Typography>
-          { localStorage.uid ? 
+          { currentUser ? 
               <Tooltip title="Open settings">
              <IconButton aria-controls={open ? 'demo-positioned-menu' : undefined}
                     aria-haspopup="true"
