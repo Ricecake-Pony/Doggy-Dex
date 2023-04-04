@@ -46,6 +46,7 @@ export default function NavBar({logOut}) {
             <NavLink className="link" to="/dog_products">
                 Dog Products
             </NavLink>
+            <NavLink className="link" to="/signup">SignUp</NavLink>
           </Typography>
           { localStorage.uid ? 
               <Tooltip title="Open settings">
@@ -72,7 +73,7 @@ export default function NavBar({logOut}) {
             }}>
             <NavLink className="link" to="/my_profile"> <MenuItem onClick={handleClose}>My Profile</MenuItem></NavLink>
             <NavLink className="link" to="/"> <MenuItem onClick={logOut}>Logout</MenuItem></NavLink>
-            <NavLink className="link" to="/signup"> <MenuItem onClick={handleClose}>SignUp</MenuItem></NavLink>
+            
           </Menu>
         </Toolbar>
       </AppBar>
