@@ -2,6 +2,10 @@ class Breed < ApplicationRecord
     has_many :breed_reviews
     has_many :users, through: :breed_reviews
 
+    def reviewed_breeds
+        breed_reviews.map{ |review| review.breed}
+    end
+
     validates :name, presence: true                             
     validates :bred_for, presence: true                    
      validates :breed_group, presence: true                                   

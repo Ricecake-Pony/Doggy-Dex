@@ -8,25 +8,19 @@ class BreedsController < ApplicationController
     
     def show
         dog_breed = Breed.find(params[:id])
-    
         render json: dog_breed, status: :ok
     end
-    
-    
-    # def create 
-        
-    # end
 
+    def breed_reviews
+        dog_breed = Breed.find(params[:id])
+        render json: dog_breed.reviewed_breeds, status: :ok
+    end
 
         ###################################################################
         private
 
         # def breed_params
         # params.permit()
-        # end
-
-        # def find_breed
-        #     Breed.find(params[:id])
         # end
 
         def render_not_found_response

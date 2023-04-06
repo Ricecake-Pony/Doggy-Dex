@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   # User custom routes
   get "/users/:id/my_profile", to: "users#my_breed_reviews"
   patch "/users", to: 'users#update' 
+
+  # Custom Breed Routes
+  get "/breeds/:id", to: "breeds#breed_reviews"
  
 
   # Defines the root path route ("/")

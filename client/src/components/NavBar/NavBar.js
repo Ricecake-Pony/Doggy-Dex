@@ -17,7 +17,6 @@ export default function NavBar({logOut}) {
          const handleClose = () => {
            setAnchorEl(null);
          };
-          console.log(currentUser)
 
   return (
     <Box sx={{ flexGrow: 1 }}>

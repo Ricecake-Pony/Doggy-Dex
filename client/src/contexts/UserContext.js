@@ -21,8 +21,7 @@ const UserProvider = ({children}) => {
         res.json()
         .then(user => {
           setCurrentUser(user)
-          console.log(user)
-          console.log("User Found:", localStorage.uid)
+          // console.log("User Found:", localStorage.uid)
         }
       )}
     })
