@@ -1,5 +1,7 @@
 class BreedReviewSerializer < ActiveModel::Serializer
-  attributes :id, :note
-  has_one :user
+  attributes :id, :note, :user
+
+  belongs_to :user
   has_one :breed
+
 end

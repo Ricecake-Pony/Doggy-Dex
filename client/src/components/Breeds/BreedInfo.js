@@ -53,18 +53,13 @@ function BreedInfo () {
 
     // })
 
-    const reviewInfo = {
-        note,
-        user_id: currentUser.id,
-        breed_id: breedId
-    }
     
     const resetForm = () => {
         setNote("")
       }
 
     
-    useEffect(() => {
+      useEffect(() => {
         fetch("http://localhost:3001/breeds/")
         .then( r => r.json())
         .then(breedData => {
@@ -72,8 +67,6 @@ function BreedInfo () {
             const selectedBreed =  breedData.filter((breed) =>  breedId == breed.id)
             setBreed(selectedBreed[0])
         })
-        console.log(breedId)
-        console.log(currentUser)
     }, [breedId])
     
     function getBreedReviews(){
@@ -85,21 +78,28 @@ function BreedInfo () {
         }
         
         function submitReviewForm(e){
+            
+            const reviewInfo = {
+                note,
+                user_id: currentUser.id,
+                breed_id: breedId
+            }
+            
             e.preventDefault()
-            console.log("I submitted")
-             fetch(`http://localhost:3001/breeds/${breed.id}`, {
+            fetch(`http://localhost:3001/breeds/${breed.id}`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
                     uid: localStorage.uid
                 },
                 body: JSON.stringify(reviewInfo)
-             })
-             resetForm()
-            }
-
-    return(
+            })
+            resetForm()
+        }
+        
+        return(
         <>
+        {console.log(reviews)}
         <Card>
         <Image breed = {breed} src= {breed.image_url}> 
           </Image>
@@ -126,6 +126,7 @@ function BreedInfo () {
              <ReviewsContainer>{reviews.map((review) => (
                  <ReviewLog key={review.id}>
                      <p>{review.note}</p>
+                    <p>By: {review.user.first_name}</p>
                  </ReviewLog>))}
              </ReviewsContainer> 
              : <></>}
