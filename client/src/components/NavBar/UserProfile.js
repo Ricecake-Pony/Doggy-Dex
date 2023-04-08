@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useContext} from "react";
-import BreedReviews from "../Reviews/BreedReviews";
 import { UserContext } from "../../contexts/UserContext";
 
 export default function UserProfile () {

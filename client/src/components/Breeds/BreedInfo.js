@@ -1,14 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
+import { UserContext } from "../../contexts/UserContext";
 import { useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 
-function BreedInfo () {
-    const location = useLocation();
-    const [breed, setBreed] = useState([])
-    const [reviews, setReviews] = useState([])
-    const [toggleReviews, setToggleReviews] = useState(false)
-    const breedId = location.state.id
-    
     const Card = styled.div `
     border: 3px solid green;
     margin: 10px;
@@ -26,6 +20,48 @@ function BreedInfo () {
     const ReviewLog = styled.div `
     border: 3px solid blue;
     `
+    const ReviewForm = styled.form `
+        border: 5px black dotted;
+        margin-left: 25%;
+        margin-right: 25%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        display: flex;
+        justify-content: center;
+        `
+    const FormInput = styled.input `
+        display: inline-block;
+         ::placeholder{
+            text-align: center;
+         };
+    
+    `
+
+function BreedInfo () {
+    const location = useLocation();
+    const {currentUser, setCurrentUser} = useContext(UserContext)
+    const [breed, setBreed] = useState([])
+    const [reviews, setReviews] = useState([])
+    const [toggleReviews, setToggleReviews] = useState(false)
+    const [note, setNote] = useState('')
+    const breedId = location.state.id
+
+    // const [reviewForm, setReviewForm] = useState({
+    //     //     note: '',
+    //     //     user_id: currentUser,
+    //     //     breed_id: breedId
+
+    // })
+
+    const reviewInfo = {
+        note,
+        user_id: currentUser.id,
+        breed_id: breedId
+    }
+    
+    const resetForm = () => {
+        setNote("")
+      }
 
     
     useEffect(() => {
@@ -36,6 +72,8 @@ function BreedInfo () {
             const selectedBreed =  breedData.filter((breed) =>  breedId == breed.id)
             setBreed(selectedBreed[0])
         })
+        console.log(breedId)
+        console.log(currentUser)
     }, [breedId])
     
     function getBreedReviews(){
@@ -44,7 +82,21 @@ function BreedInfo () {
         .then(breedReviews => 
             setReviews(breedReviews.breed_reviews))
             return setToggleReviews(!toggleReviews) 
-    }
+        }
+        
+        function submitReviewForm(e){
+            e.preventDefault()
+            console.log("I submitted")
+             fetch(`http://localhost:3001/breeds/${breed.id}`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    uid: localStorage.uid
+                },
+                body: JSON.stringify(reviewInfo)
+             })
+             resetForm()
+            }
 
     return(
         <>
@@ -67,18 +119,42 @@ function BreedInfo () {
                 Lifespan: {breed.lifespan}
             </ul>
         </Card>
-        <button onClick={() => getBreedReviews()}> Click for Reviews</button>
 
-        {toggleReviews ? 
-        <ReviewsContainer>{reviews.map((review) => (
-            <ReviewLog key={review.id}>
-                <p>{review.note}</p>
-            </ReviewLog>))}
-        </ReviewsContainer> 
-        : <></>}
+             <button onClick={() => getBreedReviews()}> Click for Reviews</button>
+     
+             {toggleReviews ? 
+             <ReviewsContainer>{reviews.map((review) => (
+                 <ReviewLog key={review.id}>
+                     <p>{review.note}</p>
+                 </ReviewLog>))}
+             </ReviewsContainer> 
+             : <></>}
+
+        <ReviewForm onSubmit={submitReviewForm}>
+             <br/>
+             <FormInput 
+             type="text" 
+             placeholder="Enter Your Thoughts on This Breed"
+             onChange={ (e) => setNote(e.target.value)}
+             />
+             <button type="submit"> Post Review</button>
+         </ReviewForm>
+         
         
         </>
     );
 }
 
 export default BreedInfo;
+
+{/* <StyledForm onSubmit={this.onSubmit}>
+<StyledInput
+ required
+ type="email"
+ name="email"
+ placeholder="Email"
+ data-testid="login-input"
+ onChange={this.onChange}
+/>
+<Button type="submit">Log in</Button>
+</StyledForm> */}

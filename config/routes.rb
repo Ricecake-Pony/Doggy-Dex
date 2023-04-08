@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :dog_product_reviews
   resources :dog_products, only: [:index, :show]
-  resources :breed_reviews
+  resources :breed_reviews 
   resources :breeds, only: [:index, :show]
   resources :users #, only: [:show, :update]
 
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   # Custom Breed Routes
   get "/breeds/:id", to: "breeds#breed_reviews"
+  post "/breeds/:id", to: "breed_reviews#create"
  
 
   # Defines the root path route ("/")

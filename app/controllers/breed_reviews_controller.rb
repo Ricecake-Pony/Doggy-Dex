@@ -1,6 +1,6 @@
 class BreedReviewsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response 
-    before_action :authorize!, only: [:update, :create]
+    before_action :authorize!, only: [:update, :create, :destroy]
     
     def index
         render json: BreedReview.all
@@ -14,6 +14,7 @@ class BreedReviewsController < ApplicationController
     def create
         new_review = BreedReview.create!(breed_review_params)
         render json: new_review, status: :created
+        # debugger
     end
 
     def update
@@ -35,7 +36,7 @@ class BreedReviewsController < ApplicationController
     private
 
     def breed_review_params
-    params.permit(:note, :user_id, :breed_id)
+    params.require(:breed_review).permit(:note, :user_id, :breed_id)
     end
 
     def find_breed_review
