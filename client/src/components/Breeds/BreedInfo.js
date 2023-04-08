@@ -4,36 +4,79 @@ import styled from "@emotion/styled";
 
 function BreedInfo () {
     const location = useLocation();
-    const [breeds, setBreeds] = useState([])
+    const [breed, setBreed] = useState([])
     const [reviews, setReviews] = useState([])
+    const [toggleReviews, setToggleReviews] = useState(false)
     const breedId = location.state.id
-    // console.log(breedId)
+    
+    const Card = styled.div `
+    border: 3px solid green;
+    margin: 10px;
+    padding-left: 10px;
+    `
+    const Image = styled.img`
+    background-x: center;
+    border: 5px solid black;
+    height: auto;
+    width: 300px;
+    `
+    const ReviewsContainer = styled.div `
+    border: 3px solid pink;
+    `
+    const ReviewLog = styled.div `
+    border: 3px solid blue;
+    `
 
     
     useEffect(() => {
-        fetch("https://api.thedogapi.com/v1/breeds")
+        fetch("http://localhost:3001/breeds/")
         .then( r => r.json())
         .then(breedData => {
             
             const selectedBreed =  breedData.filter((breed) =>  breedId == breed.id)
-            setBreeds(selectedBreed[0])
+            setBreed(selectedBreed[0])
         })
-    }, [])
+    }, [breedId])
     
     function getBreedReviews(){
-        fetch(`http://localhost:3001/breeds/${breeds.id}`)
+        fetch(`http://localhost:3001/breeds/${breed.id}`)
         .then(r => r.json())
         .then(breedReviews => 
-            setReviews(breedReviews.breed_reviews)
-            )
+            setReviews(breedReviews.breed_reviews))
+            return setToggleReviews(!toggleReviews) 
     }
 
     return(
         <>
-        {console.log(reviews)}
-        {breeds.name}
-        {/* {breeds.breed_reviews} */}
+        <Card>
+        <Image breed = {breed} src= {breed.image_url}> 
+          </Image>
+          <br/>
+        {breed.name}
+            <ul>
+                Temperament: {breed.temperament}
+                <br/>
+                Breed group: {breed.breed_group}
+                <br/>
+                Bred for: {breed.bred_for}
+                <br/>
+                Average Height: {breed.height_imperial} ({breed.height_metric})
+                <br/>
+                Average Weight: {breed.weight_imperial}  ({breed.weight_metric})
+                <br/>
+                Lifespan: {breed.lifespan}
+            </ul>
+        </Card>
         <button onClick={() => getBreedReviews()}> Click for Reviews</button>
+
+        {toggleReviews ? 
+        <ReviewsContainer>{reviews.map((review) => (
+            <ReviewLog key={review.id}>
+                <p>{review.note}</p>
+            </ReviewLog>))}
+        </ReviewsContainer> 
+        : <></>}
+        
         </>
     );
 }

@@ -21,7 +21,7 @@ export default function Breeds(){
     };
     
     useEffect(() => {
-        fetch("https://api.thedogapi.com/v1/breeds")
+        fetch("http://localhost:3001/breeds/")
         .then( r => r.json())
         .then(breedData => setBreeds(breedData))
     }, [])

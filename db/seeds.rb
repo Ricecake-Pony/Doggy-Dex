@@ -15,7 +15,7 @@ puts "Creating Users..."
 trey = User.create( first_name: "Trey", password: "Testing!1", email: "trey@gmail.com", image_url: "https://www.akc.org/wp-content/uploads/2017/11/Shikoku-standing-outdoors.jpg")
 kevin = User.create( first_name: "Kevin", password: "Testing!1", email: "kevin@gmail.com",image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcQbsBNUXW3tkRRjBg4oMOtMlMRfWzg-Drpg&usqp=CAU")
 puts "Users Created!"
-# 172 dog pop boxer=45
+# 172 dog pop boxer=45 but id 55
 puts "Creating Breeds"
 
         url = "https://api.thedogapi.com/v1/breeds"
@@ -28,14 +28,13 @@ puts "Creating Breeds"
         bred_for: dog["bred_for"],
         breed_group: dog["breed_group"], 
         lifespan: dog["life_span"], 
-        weight_imperial: "#{dog["weight"]["imperial"]} ",
-        weight_metric: dog["weight"]["metric"], 
-        height_imperial: dog["height"]["imperial"] ,
-        height_metric: dog["height"]["metric"],
+        weight_imperial: "#{dog["weight"]["imperial"]} lbs",
+        weight_metric: "#{dog["weight"]["metric"]} kgs", 
+        height_imperial: "#{dog["height"]["imperial"]} in" ,
+        height_metric: "#{dog["height"]["metric"]} cm",
         temperament: dog["temperament"], 
         image_url: dog["image"]["url"])
 
-        
         end
 
 
@@ -47,6 +46,8 @@ puts "Creating Breed Reviews"
         BreedReview.create(note: "They're such clowns!", user: trey, breed_id: 55)
         BreedReview.create(note: "They're so energetic! I love boxers!", user: kevin, breed_id: 55)
         BreedReview.create(note: "They suck!", user: kevin, breed_id: 1)
+        BreedReview.create(note: "They're pretty ferocious!", user: trey, breed_id: 1)
+        BreedReview.create(note: "They're starting to rub off on me actually...", user: trey, breed_id: 1)
 puts "Breed Reviews Complete"
 
 puts "Creating Dog Products"

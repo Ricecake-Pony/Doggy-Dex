@@ -25,16 +25,10 @@ export default function BreedCard ({breed}) {
     return(
         <div>
         <Card>
-          <Image breed = {breed} src= {breed.image.url} onClick={ () => handleClick()}> 
+          <Image breed = {breed} src= {breed.image_url} onClick={ () => handleClick()}> 
           </Image>
           <br/>
         {breed.name}
-                <ul>
-                    Bred for: {breed.bred_for}
-                    <br/>
-                    Breed group: {breed.breed_group}
-                    <br/>
-                </ul>
             </Card>
             </div>
     )
