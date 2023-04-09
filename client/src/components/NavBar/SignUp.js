@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 
  function SignUp( {signUpURL}){
         const [user, setUser] = useState(null);
+        const [username, setUsername] = useState("");
         const [email, setEmail] = useState('')
         const [firstName, setFirstName] = useState('')
         const [password, setPassword] = useState('')
         const [imageUrl, setImageUrl] = useState('')
+        const [passwordConfirmation, setPasswordConfirmation] = useState("");
         const [dogImage, setDogImage] = useState(null)
         const [errors, setErrors] = useState()
         let navigate = useNavigate();
@@ -19,14 +21,18 @@ import { useNavigate } from "react-router-dom";
 
         const signUpInfo = {
             email: email,
+            username: username,
             first_name: firstName,
             password: password,
+            passwordConfirmation: passwordConfirmation,
             image_url: dogImage
         }
 
             const resetForm = () => {
+                setUsername("")
                 setEmail("")
                 setPassword("")
+                setPasswordConfirmation("")
                 setFirstName("")
                 setImageUrl("")
               }
@@ -56,20 +62,6 @@ import { useNavigate } from "react-router-dom";
           }
 
 
-            // .then(r => {
-            //     if (r.ok){
-            //     r.json().then(createdUser => {
-            //         setUser(createdUser)) }
-            //         resetForm()
-            //     alert("Sign Up Completed Successfully. Please Login")
-            //     )}
-            //     } else {
-            // alert('Error: Sign Up Failed')
-            //     }
-            
-            // .catch(error => {
-            //     alert(`Error: ${error.message}`)
-            // })
     return (
         <>
         <ul>Password Conditions
@@ -81,27 +73,44 @@ import { useNavigate } from "react-router-dom";
         </ul>
             <form onSubmit={submitProfile}>
                 <input
-                id="email"
-                placeholder="email"
-                type='email' 
-                onChange={(e) => setEmail(e.target.value)} 
-                value={email}
+                    id="email"
+                    placeholder="email"
+                    type='email' 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    value={email}
                 />
                 <br/>
                 <input
-                id="password"
-                placeholder="password"
-                type='password' 
-                onChange={(e) => setPassword(e.target.value)} 
-                value={password}
+                    id="password"
+                    placeholder="password"
+                    type='password' 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    value={password}
                 />
                 <br/>
                 <input
-                id="firstName"
-                placeholder="First Name"
-                type='text' 
-                onChange={(e) => setFirstName(e.target.value)} 
-                value={firstName}
+                    class="password-confirmation"
+                    type="password"
+                    id="password_confirmation"
+                    placeholder="password confirmation"
+                    value={passwordConfirmation}
+                    onChange={(e) => setPasswordConfirmation(e.target.value)}
+                />
+                <br/>
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                 />
+                 <br/>
+                <input
+                    id="firstName"
+                    placeholder="First Name"
+                    type='text' 
+                    onChange={(e) => setFirstName(e.target.value)} 
+                    value={firstName}
                 />
                 <br/>
                 {/* <input
@@ -111,7 +120,7 @@ import { useNavigate } from "react-router-dom";
                 value={imageUrl}
                 /> */}
                 <br/>
-                <button type="submit">Create Profile</button>
+                <button type="submit" disabled={password !== passwordConfirmation || !username || !email || !firstName }>Create Profile</button>
             </form>
         </>
     )

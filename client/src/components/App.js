@@ -9,6 +9,7 @@ import UserProfile from './NavBar/UserProfile';
 import styled from "@emotion/styled";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
+import DogProducts from './NavBar/DogProducts';
 
 const baseURL= "http://localhost:3001/"
 const signUpURL = baseURL + 'signup';
@@ -35,7 +36,7 @@ function App() {
           <Route exact path ="/Signup" element={<SignUp signUpURL = {signUpURL} />} />
           <Route exact path ="/my_profile" element={<UserProfile myProfileURL = {myProfileURL} />} />
           <Route exact path ="/breeds" element={<Breeds breedsURL = {breedsURL} />} />
-          {/* <Route exact path ="dog_products" element={<Breeds productsURL = {productsURL} />} /> */}
+          <Route exact path ="dog_products" element={<DogProducts />} />
           <Route path= "/breeds/:id" element= {<BreedInfo />}/>
         </Routes>
     </div>

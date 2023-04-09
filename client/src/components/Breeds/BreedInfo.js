@@ -126,7 +126,7 @@ function BreedInfo () {
              <ReviewsContainer>{reviews.map((review) => (
                  <ReviewLog key={review.id}>
                      <p>{review.note}</p>
-                    <p>By: {review.user.first_name}</p>
+                    <p>By: {review.user.username}</p>
                  </ReviewLog>))}
              </ReviewsContainer> 
              : <></>}

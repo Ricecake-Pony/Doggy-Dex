@@ -15,6 +15,7 @@ class User < ApplicationRecord
    
     # This activates Bcrypt for our :password_digest
     has_secure_password
+    validates :username, presence:true, uniqueness: true
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP}
 
     PASSWORD_REQUIREMENTS = /\A

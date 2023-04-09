@@ -12,8 +12,8 @@ DogProductReview.destroy_all
 puts " Database Cleared!"
 
 puts "Creating Users..."
-trey = User.create( first_name: "Trey", password: "Testing!1", email: "trey@gmail.com", image_url: "https://www.akc.org/wp-content/uploads/2017/11/Shikoku-standing-outdoors.jpg")
-kevin = User.create( first_name: "Kevin", password: "Testing!1", email: "kevin@gmail.com",image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcQbsBNUXW3tkRRjBg4oMOtMlMRfWzg-Drpg&usqp=CAU")
+trey = User.create( first_name: "Trey", username:"Tray", password: "Testing!1", email: "trey@gmail.com", image_url: "https://www.akc.org/wp-content/uploads/2017/11/Shikoku-standing-outdoors.jpg")
+kevin = User.create( first_name: "Kevin", username: "Kvin", password: "Testing!1", email: "kevin@gmail.com",image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcQbsBNUXW3tkRRjBg4oMOtMlMRfWzg-Drpg&usqp=CAU")
 puts "Users Created!"
 # 172 dog pop boxer=45 but id 55
 puts "Creating Breeds"
