@@ -9,6 +9,10 @@ class User < ApplicationRecord
         breed_reviews.map{ |review| review}
     end
 
+    def reviewed_breeds
+        breed_reviews.filter{ |review| review.id}
+    end
+
     def reviewed_products
         dog_products.map{ |review| review.dog_product}
     end

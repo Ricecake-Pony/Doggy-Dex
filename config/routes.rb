@@ -16,13 +16,12 @@ Rails.application.routes.draw do
 
   # User custom routes
   get "/users/:id/my_profile", to: "users#my_breed_reviews"
-  patch "/users", to: 'users#update' 
+  patch "/users/:id/my_profile/:review_id", to: 'users#update_breed_review' 
 
   # Custom Breed Routes
   get "/breeds/:id", to: "breeds#breed_reviews"
   post "/breeds/:id", to: "breed_reviews#create"
  
-
   # Defines the root path route ("/")
   # root "articles#index"
 end

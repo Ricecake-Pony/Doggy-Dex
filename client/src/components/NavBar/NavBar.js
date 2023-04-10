@@ -1,6 +1,6 @@
 import { NavLink} from "react-router-dom"
 import * as React from 'react';
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Avatar, Tooltip, MenuItem } from '@mui/material';
 import PetIcon from '@mui/icons-material/Pets';
 import { UserContext } from "../../contexts/UserContext";

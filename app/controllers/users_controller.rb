@@ -28,15 +28,21 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
         render json: current_user.reviewed_breeds, status: :ok
     end
 
-    def update
-        render json: { messages: ['yeah update!'], user: current_user}, status: :ok
+    def update_breed_review
+        updated_review = BreedReview.find(params[:review_id])
+        updated_review.update!(review_params)
+        render json: updated_review , status: :ok
     end
     
     ################################################################
     private
 
     def user_params
-        params.permit( :id, :email, :password, :first_name, :image_url)
+        params.permit( :id, :email, :password, :username, :first_name, :image_url)
+    end
+
+    def review_params
+        params.permit(:note )
     end
 
  # params.permit is allowing only the username and password to be permitted to be created/ only the ones we want to be used. This is also known as Strong params and stops mass assignment vulnerabilities by letting only these params through and nothing else.

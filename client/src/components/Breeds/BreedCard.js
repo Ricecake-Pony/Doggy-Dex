@@ -20,7 +20,8 @@ export default function BreedCard ({breed}) {
   const navigate = useNavigate()
      
  const handleClick = (() => {
-    navigate(`/breeds/${breed.id}`, {state: {id: breed.id}})
+  console.log(breed)
+    // navigate(`/breeds/${breed.id}`, {state: {id: breed.id}})
   })
     return(
         <div>
