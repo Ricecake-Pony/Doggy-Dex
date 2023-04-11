@@ -1,11 +1,30 @@
-import { NavLink} from "react-router-dom"
+import { Link as RouterLink} from "react-router-dom"
 import * as React from 'react';
 import { useContext } from "react";
-import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Avatar, Tooltip, MenuItem } from '@mui/material';
+import { Box, IconButton, Typography, Menu, Avatar, Tooltip, MenuItem } from '@mui/material';
 import PetIcon from '@mui/icons-material/Pets';
 import { UserContext } from "../../contexts/UserContext";
 import LoginModal from "./LoginModal";
+
 import styled from "@emotion/styled";
+
+const AppBar = styled.div`
+position: absolute top;
+ background-color: #F26419;
+ width: 100%;
+display: flex;
+flex-direction: row;
+align-items: space-evenly;
+justify-content: space-around;
+font-family:'Playfair Display', serif;
+
+`
+const Link = styled(RouterLink)`
+text-decoration: none;
+font-size: 36px;
+color: #197BBD;
+`
+
 
 export default function NavBar({logOut}) {
     const {currentUser, setCurrentUser} = useContext(UserContext)
@@ -19,30 +38,25 @@ export default function NavBar({logOut}) {
          };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{background: ''}}>
-        <Toolbar>
-            <PetIcon className="nav-icon"/>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            
-            <NavLink className="link" to="/">
+      <AppBar >
+          <PetIcon className="nav-icon" sx={{fontSize: '300%'}}/>
+            <Link className="link" to="/" >
                 Home
-            </NavLink>
-            <NavLink className="link" to="/breeds">
+            </Link>
+            <Link className="link" to="/breeds" >
                 Dog Breeds
-            </NavLink>
-            <NavLink className="link" to="/dog_products">
+            </Link>
+            <Link className="link" to="/dog_products">
                 Dog Products
-            </NavLink>
-            <NavLink className="link" to="/signup">SignUp</NavLink>
-          </Typography>
+            </Link>
+            <Link className="link" to="/signup">SignUp</Link>
           { currentUser ? 
               <Tooltip title="Open settings">
-             <IconButton aria-controls={open ? 'demo-positioned-menu' : undefined}
+             <IconButton  aria-controls={open ? 'demo-positioned-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick} sx={{ p: 0 }}>
-                { currentUser ? (  <Avatar alt={currentUser.first_name} src={currentUser.image_url}/>) : (null) }
+                { currentUser ? (  <Avatar alt={currentUser.first_name} src={currentUser.image_url} sx={{ width: 'auto', height: 60 }}/>) : (null) }
              </IconButton>
           </Tooltip>
            : <LoginModal/> }
@@ -59,11 +73,9 @@ export default function NavBar({logOut}) {
                 vertical: 'top',
                 horizontal: 'left',
             }}>
-            <NavLink className="link" to="/my_profile"> <MenuItem onClick={handleClose}>My Profile</MenuItem></NavLink>
-            <NavLink className="link" to="/"> <MenuItem onClick={logOut}>Logout</MenuItem></NavLink>
+            <Link className="link" to="/my_profile"> <MenuItem onClick={handleClose}>My Profile</MenuItem></Link>
+            <Link className="link" to="/"> <MenuItem onClick={logOut}>Logout</MenuItem></Link>
           </Menu>
-        </Toolbar>
       </AppBar>
-    </Box>
   );
   }
