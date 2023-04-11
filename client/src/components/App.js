@@ -10,6 +10,7 @@ import styled from "@emotion/styled";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import DogProducts from './NavBar/DogProducts';
+import { GlobalStyles } from '@mui/material';
 
 const baseURL= "http://localhost:3001/"
 const signUpURL = baseURL + 'signup';
@@ -30,6 +31,11 @@ function App() {
 
     return (
     <div className="App">
+      <GlobalStyles
+  styles={{
+    body: { backgroundColor: "#EEE5E9" }
+  }}
+/>
         <NavBar logOut= {logOut}/>
         <Routes>
           <Route exact path="/" element={<Home />} />

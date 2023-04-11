@@ -20,7 +20,7 @@ export default function NavBar({logOut}) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{background: ''}}>
         <Toolbar>
             <PetIcon className="nav-icon"/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
