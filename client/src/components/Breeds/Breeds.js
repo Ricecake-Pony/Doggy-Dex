@@ -47,6 +47,7 @@ export default function Breeds(){
     <>
 
 <TablePagination
+      sx={{backgroundColor: '#F5A614'}}
       component="div"
       count={172}
       page={page}

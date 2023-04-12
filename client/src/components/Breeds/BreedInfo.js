@@ -2,18 +2,25 @@ import React, {useEffect, useState, useContext} from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-    const Card = styled.div `
-    border: 3px solid green;
-    margin: 10px;
-    padding-left: 10px;
-    `
-    const Image = styled.img`
-    background-x: center;
-    border: 5px solid black;
-    height: auto;
-    width: 300px;
-    `
+    // const Card = styled.div `
+    // border: 3px solid black;
+    // background-color: #F6AE2D;
+    // margin: 10px;
+    // padding-left: 10px;
+    // `
+    // const Image = styled.img`
+    // /* background-x: center; */
+    // border: 5px solid black;
+    // height: auto;
+    // width: 300px;
+    // `
     const ReviewsContainer = styled.div `
     border: 3px solid pink;
     `
@@ -45,13 +52,6 @@ function BreedInfo () {
     const [toggleReviews, setToggleReviews] = useState(false)
     const [note, setNote] = useState('')
     const breedId = location.state.id
-
-    // const [reviewForm, setReviewForm] = useState({
-    //     //     note: '',
-    //     //     user_id: currentUser,
-    //     //     breed_id: breedId
-
-    // })
 
     
     const resetForm = () => {
@@ -99,26 +99,35 @@ function BreedInfo () {
         
         return(
         <>
-        {console.log(reviews)}
-        <Card>
-        <Image breed = {breed} src= {breed.image_url}> 
-          </Image>
-          <br/>
+
+<Card sx={{ maxWidth: '75%', margin: 5, backgroundColor: "#F5A614" }}>
+      <CardMedia
+        sx={{ height: 'auto', width: '110%'}}
+        component="img"
+        image={breed.image_url}
+        title={breed.name}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" sx={{color:"#1F1A38", fontFamily: 'Mulish'}} component="div">
         {breed.name}
-            <ul>
-                Temperament: {breed.temperament}
-                <br/>
-                Breed group: {breed.breed_group}
-                <br/>
-                Bred for: {breed.bred_for}
-                <br/>
-                Average Height: {breed.height_imperial} ({breed.height_metric})
-                <br/>
-                Average Weight: {breed.weight_imperial}  ({breed.weight_metric})
-                <br/>
-                Lifespan: {breed.lifespan}
-            </ul>
-        </Card>
+        </Typography>
+        <Typography variant="body2" sx={{color:"#1F1A38", fontFamily: 'Lato'}}>
+        Temperament: {breed.temperament}
+        <br/>
+        Breed group: {breed.breed_group}
+        <br/>
+        Bred for: {breed.bred_for}
+        <br/>
+        Average Height: {breed.height_imperial} ({breed.height_metric})
+        <br/>
+        Average Weight: {breed.weight_imperial}  ({breed.weight_metric})
+        <br/>
+        Lifespan: {breed.lifespan}
+
+        </Typography>
+      </CardContent>
+    </Card>
+        {console.log(reviews)}
 
              <button onClick={() => getBreedReviews()}> Click for Reviews</button>
      
@@ -150,12 +159,31 @@ export default BreedInfo;
 
 {/* <StyledForm onSubmit={this.onSubmit}>
 <StyledInput
- required
+required
  type="email"
  name="email"
  placeholder="Email"
  data-testid="login-input"
  onChange={this.onChange}
-/>
-<Button type="submit">Log in</Button>
+ />
+ <Button type="submit">Log in</Button>
 </StyledForm> */}
+{/* <Card>
+<Image breed = {breed} src= {breed.image_url}> 
+  </Image>
+  <br/>
+{breed.name}
+    <ul>
+        Temperament: {breed.temperament}
+        <br/>
+        Breed group: {breed.breed_group}
+        <br/>
+        Bred for: {breed.bred_for}
+        <br/>
+        Average Height: {breed.height_imperial} ({breed.height_metric})
+        <br/>
+        Average Weight: {breed.weight_imperial}  ({breed.weight_metric})
+        <br/>
+        Lifespan: {breed.lifespan}
+    </ul>
+</Card> */}

@@ -10,7 +10,7 @@ const Card = styled.div `
     `
 
 const Image = styled.img`
-background-x: center;
+/* background-x: center; */
 border: 5px solid black;
 height: auto;
 width: 300px;

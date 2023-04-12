@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 
 const AppBar = styled.div`
 position: absolute top;
- background-color: #F26419;
+ background-color: #F5A614;
  width: 100%;
 display: flex;
 flex-direction: row;
