@@ -100,7 +100,7 @@ function BreedInfo () {
         return(
         <>
 
-<Card sx={{ maxWidth: '75%', margin: 5, backgroundColor: "#F5A614" }}>
+<Card sx={{ maxWidth: '50%', margin: 5, backgroundColor: "#F5A614", marginLeft: '25%'}}>
       <CardMedia
         sx={{ height: 'auto', width: '110%'}}
         component="img"

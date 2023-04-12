@@ -18,7 +18,7 @@ export default function BreedCard ({breed}) {
         <div>
           <Card sx={{ maxWidth: 450, margin: 5, backgroundColor: "#F5A614" }}>
       <CardMedia
-        sx={{ height: 'auto', width: 450}}
+        sx={{ height: 'auto', width: 455}}
         component="img"
         image={breed.image_url}
         title={breed.name}

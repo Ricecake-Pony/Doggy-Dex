@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 
 const AppBar = styled.div`
 position: absolute top;
- background-color: #F5A614;
+ background-color: #F6AE2D;
  width: 100%;
 display: flex;
 flex-direction: row;
@@ -22,9 +22,8 @@ font-family:'Playfair Display', serif;
 const Link = styled(RouterLink)`
 text-decoration: none;
 font-size: 36px;
-color: #197BBD;
+color: #1f1a38;
 `
-
 
 export default function NavBar({logOut}) {
     const {currentUser, setCurrentUser} = useContext(UserContext)
