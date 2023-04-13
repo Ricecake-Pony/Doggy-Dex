@@ -30,20 +30,21 @@ export default function Home(){
 
     return(
 
-        <>
-            <WelcomeHeader>
+        < div>
+            {currentUser ?
+                <WelcomeHeader>
 
-            {
-                currentUser ? ( <img src={currentUser.image_url} style={{width: 300, height: 'auto'}} />)  : (null)        
-            }
-            {
-                currentUser ? (  <h3> { currentUser && ( `Welcome Home ${currentUser.first_name}`) } </h3>)  : (null) 
-            }
+                {
+                    currentUser ? ( <img src={currentUser.image_url} style={{width: 300, height: 'auto'}} />)  : (null)        
+                }
+                {
+                    currentUser ? (  <h3> { currentUser && ( `Welcome Home ${currentUser.first_name}`) } </h3>)  : (null) 
+                }
+                </WelcomeHeader>
+                : <></>
+                }
 
-                
-        </WelcomeHeader>
-
-        <Card sx={{ backgroundColor:"#F5A614", mr: '55%', fontFamily: 'lato' }}>
+        <Card sx={{ backgroundColor:"#F5A614", width: '50%', mr: "30%" , ml:"25%" , fontFamily: 'lato', display: 'flex', flexDirection: 'column', alignItems: 'center', mt: "5%"}}>
             Welcome to Doggy Dex, the one stop shop for you to find the best dog breed for your needs, Here you can find more about a dog's
             <ul>
                 <li>Lifespan</li>
@@ -54,7 +55,9 @@ export default function Home(){
 
             <h3 style={{fontFamily: 'lato'}}>NOTE: You must log in to have access to the website's features.</h3>
         </Card>
-        </>
+        
+                
+        </div>
         
     )
 }
