@@ -17,7 +17,6 @@ export default function LoginModal() {
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
-  const [errors, setErrors] = useState()
   const {currentUser, setCurrentUser} = useContext(UserContext)
   const navigate = useNavigate()
   
