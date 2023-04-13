@@ -3,7 +3,7 @@ import React from "react";
 export default function DogProduct() {
     return(
         <>
-        Currently under construction!
+        {alert("Under construction! Stay tuned for doggie toys and equipment")}
         </>
     )
 }

@@ -5,7 +5,7 @@ import BreedInfo from './Breeds/BreedInfo';
 import NavBar from './NavBar/NavBar';
 import SignUp from './NavBar/SignUp';
 import Home from './HomePage/Home';
-import UserProfile from './NavBar/UserProfile';
+import UserProfile from './NavBar/UserProfile/UserProfile';
 import styled from "@emotion/styled";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';

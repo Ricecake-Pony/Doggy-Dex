@@ -16,7 +16,7 @@ export default function BreedCard ({breed}) {
   })
     return(
         <div>
-          <Card sx={{ maxWidth: 450, margin: 5, backgroundColor: "#F5A614" }}>
+          <Card sx={{ maxWidth: 450, marginLeft: 18, marginTop: 5, backgroundColor: "#F5A614" }}>
       <CardMedia
         sx={{ height: 'auto', width: 455}}
         component="img"
@@ -28,11 +28,13 @@ export default function BreedCard ({breed}) {
         {breed.name}
         </Typography>
         <Typography variant="body2" sx={{color:"#1F1A38", fontFamily: 'Lato'}}>
-        Temperament: {breed.temperament}
+          <br/>Temperament: <br/>
+        {breed.temperament}
+
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small"  onClick={ () => handleClick()}>Learn More</Button>
+        <Button variant="contained" size="small"  onClick={ () => handleClick()}>Learn More</Button>
       </CardActions>
     </Card>
             </div>

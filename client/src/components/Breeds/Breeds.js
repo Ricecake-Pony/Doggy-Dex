@@ -46,18 +46,19 @@ export default function Breeds(){
     return(
     <>
 
-<TablePagination
-      sx={{backgroundColor: '#F6AE2D'}}
-      component="div"
-      count={172}
-      page={page}
-      onPageChange={handleChangePage}
-      rowsPerPage={rowsPerPage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                {onScreen[page]?.map((breed) => (<BreedCard key={breed.id} breed={breed}/>))}
-            </div>
+        <TablePagination
+        sx={{backgroundColor: '#F6AE2D'}}
+        component="div"
+        count={172}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+        
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                    {onScreen[page]?.map((breed) => (<BreedCard key={breed.id} breed={breed}/>))}
+        </div>
     </>
     )
 }

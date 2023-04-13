@@ -8,39 +8,33 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Box } from "@mui/material";
+import TextField from '@mui/material/TextField';
 
-    // const Card = styled.div `
-    // border: 3px solid black;
-    // background-color: #F6AE2D;
-    // margin: 10px;
-    // padding-left: 10px;
-    // `
-    // const Image = styled.img`
-    // /* background-x: center; */
-    // border: 5px solid black;
-    // height: auto;
-    // width: 300px;
-    // `
     const ReviewsContainer = styled.div `
-    border: 3px solid pink;
-    `
-    const ReviewLog = styled.div `
-    border: 3px solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 1rem;
     `
     const ReviewForm = styled.form `
-        border: 5px black dotted;
+        background-color: #F5A614;
+        border: 1.5px black solid;
         margin-left: 25%;
         margin-right: 25%;
         padding-top: 1%;
         padding-bottom: 1%;
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         `
     const FormInput = styled.input `
         display: inline-block;
          ::placeholder{
             text-align: center;
-         };
+        };
+        width: 210px;
+        height: 50px;
     
     `
 
@@ -98,59 +92,77 @@ function BreedInfo () {
         }
         
         return(
-        <>
+    <>
 
-<Card sx={{ maxWidth: '50%', margin: 5, backgroundColor: "#F5A614", marginLeft: '25%'}}>
-      <CardMedia
-        sx={{ height: 'auto', width: '110%'}}
-        component="img"
-        image={breed.image_url}
-        title={breed.name}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" sx={{color:"#1F1A38", fontFamily: 'Mulish'}} component="div">
-        {breed.name}
-        </Typography>
-        <Typography variant="body2" sx={{color:"#1F1A38", fontFamily: 'Lato'}}>
-        Temperament: {breed.temperament}
-        <br/>
-        Breed group: {breed.breed_group}
-        <br/>
-        Bred for: {breed.bred_for}
-        <br/>
-        Average Height: {breed.height_imperial} ({breed.height_metric})
-        <br/>
-        Average Weight: {breed.weight_imperial}  ({breed.weight_metric})
-        <br/>
-        Lifespan: {breed.lifespan}
-
-        </Typography>
-      </CardContent>
-    </Card>
-        {console.log(reviews)}
-
-             <button onClick={() => getBreedReviews()}> Click for Reviews</button>
+        <Card sx={{ maxWidth: '50%', margin: 5, backgroundColor: "#F5A614", marginLeft: '25%'}}>
+            <CardMedia
+                sx={{ height: 'auto', width: '110%'}}
+                component="img"
+                image={breed.image_url}
+                title={breed.name}
+            />
+            <CardContent>
+                <Typography gutterBottom variant="h5" sx={{color:"#1F1A38", fontFamily: 'Mulish'}} component="div">
+                {breed.name}
+                </Typography>
+                <Typography variant="body2" sx={{color:"#1F1A38", fontFamily: 'Lato'}}>
+                Temperament: {breed.temperament}
+                <br/>
+                Breed group: {breed.breed_group}
+                <br/>
+                Bred for: {breed.bred_for}
+                <br/>
+                Average Height: {breed.height_imperial} ({breed.height_metric})
+                <br/>
+                Average Weight: {breed.weight_imperial}  ({breed.weight_metric})
+                <br/>
+                Lifespan: {breed.lifespan}
+                <br/>
+                <br/>
+                    <Button variant="contained" onClick={() => getBreedReviews()}> Click for Reviews</Button>
+                </Typography>
+            </CardContent>
+        </Card>
      
-             {toggleReviews ? 
-             <ReviewsContainer>{reviews.map((review) => (
-                 <ReviewLog key={review.id}>
-                     <p>{review.note}</p>
-                    <p>By: {review.user.username}</p>
-                 </ReviewLog>))}
-             </ReviewsContainer> 
-             : <></>}
-
         <ReviewForm onSubmit={submitReviewForm}>
-             <br/>
              <FormInput 
              type="text" 
              placeholder="Enter Your Thoughts on This Breed"
              onChange={ (e) => setNote(e.target.value)}
              />
-             <button type="submit"> Post Review</button>
+            <Button sx={{ float: "left"}} variant="contained">Post Review</Button>
          </ReviewForm>
-         
-        
+
+             {toggleReviews ? 
+             <ReviewsContainer>{reviews.map((review) => (
+                 
+                    <Box component="div" 
+                    sx={{ width: '48%', 
+                    flex: '0 0 auto', 
+                    mt: 3 }} 
+                    key={review.id}
+                    >
+                        
+                        <Card 
+                        variant="outlined" 
+                        sx={{
+                            backgroundColor: "#F5A614",
+                            mb: 1.5, 
+                            borderBlockColor: 'white',
+                            mr: '35%',
+                            ml:'10%' }}
+                        >
+                            <Typography 
+                                sx={{ color:"#1F1A38", fontFamily: 'Lato'}}>
+                                    <p>{review.note}</p>
+                                    <p>By: {review.user.username}</p>
+                            <img src={review.user.image_url} width={150} height={'auto'}/>
+                            </Typography>
+                        </Card>
+                    </Box>    ))}
+             </ReviewsContainer> 
+             : <></>}
+
         </>
     );
 }

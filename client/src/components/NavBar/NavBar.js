@@ -1,7 +1,7 @@
 import { Link as RouterLink} from "react-router-dom"
 import * as React from 'react';
 import { useContext } from "react";
-import { Box, IconButton, Typography, Menu, Avatar, Tooltip, MenuItem } from '@mui/material';
+import { IconButton, Menu, Avatar, Tooltip, MenuItem } from '@mui/material';
 import PetIcon from '@mui/icons-material/Pets';
 import { UserContext } from "../../contexts/UserContext";
 import LoginModal from "./LoginModal";
