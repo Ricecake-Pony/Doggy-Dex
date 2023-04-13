@@ -1,5 +1,16 @@
 import React, {useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom";
+import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import styled from "@emotion/styled";
+
+const FormContainer = styled.div `
+    display: flex;
+    justify-content: center;
+
+`
 
  function SignUp( {signUpURL}){
         const [user, setUser] = useState(null);
@@ -56,7 +67,7 @@ import { useNavigate } from "react-router-dom";
                   navigate("/")
                 } else {
                     r.json().then(errors => setErrors(errors),
-                  alert("An Error Ocurred, Type: 422 (Unprocessable Entity)")
+                  alert(errors.errors)
                 )}
               })
           }
@@ -64,64 +75,73 @@ import { useNavigate } from "react-router-dom";
 
     return (
         <>
-        <ul>Password Conditions
-            <li> Must be at least 8 characters long</li>
-            <li> Must contain one number at least (123)</li>
-            <li> Must contain at least one lower case letter (abc)</li>
-            <li> Must contain at least one upper case letter (ABC)</li>
-            <li> Must contain at least one symbol (!@#)</li>
-        </ul>
+        <FormContainer>
+            <Card sx={{m: 10, width: 350, backgroundColor: "#F5A614"}}>
+            <Typography sx={{color:"#1F1A38", fontFamily: 'Mulish'}}>
+
+            <ul>Password Conditions
+                <li> Must be at least 8 characters long</li>
+                <li> Must contain one number at least (123)</li>
+                <li> Must contain at least one lower case letter (abc)</li>
+                <li> Must contain at least one upper case letter (ABC)</li>
+                <li> Must contain at least one symbol (!@#)</li>
+            </ul>
+            </Typography>
             <form onSubmit={submitProfile}>
-                <input
-                    id="email"
-                    placeholder="email"
-                    type='email' 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    value={email}
+
+                    <TextField
+                required
+                sx={{backgroundColor: "white", mt:1, mb: 1, display: "flex", justifyContent: 'center', ml:"10%", mr: "10%"}}
+                id="outlined-required"
+                placeholder="email"
+                label="Email Required"
+                type='email' 
+                onChange={(e) => setEmail(e.target.value)} 
+                value={email}
                 />
-                <br/>
-                <input
-                    id="password"
-                    placeholder="password"
-                    type='password' 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    value={password}
-                />
-                <br/>
-                <input
-                    class="password-confirmation"
-                    type="password"
-                    id="password_confirmation"
-                    placeholder="password confirmation"
-                    value={passwordConfirmation}
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}
-                />
-                <br/>
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                 />
-                 <br/>
-                <input
-                    id="firstName"
-                    placeholder="First Name"
-                    type='text' 
-                    onChange={(e) => setFirstName(e.target.value)} 
-                    value={firstName}
-                />
-                <br/>
-                {/* <input
-                placeholder="imageUrl"
+                <TextField
+                required
+                sx={{backgroundColor: "white", mt:1, mb: 1, display: "flex", justifyContent: 'center', ml:"10%", mr: "10%"}}
+                id="outlined-required"
+                label="Username Required"
                 type='text' 
-                onChange={(e) => setImageUrl(e.target.value)} 
-                value={imageUrl}
-                /> */}
-                <br/>
-                <button type="submit" disabled={password !== passwordConfirmation || !username || !email || !firstName }>Create Profile</button>
-            </form>
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                />
+                <TextField
+                required
+                sx={{backgroundColor: "white", mt:1, mb: 1, display: "flex", justifyContent: 'center', ml:"10%", mr: "10%"}}
+                id="outlined-required"
+                label="First Name Required"
+                type='text' 
+                onChange={(e) => setFirstName(e.target.value)} 
+                value={firstName}
+                />
+                <TextField
+                required
+                sx={{backgroundColor: "white", mt:1, mb: 1, display: "flex", justifyContent: 'center', ml:"10%", mr: "10%"}}
+                id="outlined-required"
+                label="Password Required"
+                type='password' 
+                onChange={(e) => setPassword(e.target.value)} 
+                value={password}
+                />
+        
+                <TextField
+                required
+                sx={{backgroundColor: "white", mt:1, mb: 1, display: "flex", justifyContent: 'center', ml:"10%", mr: "10%"}}
+                id="outlined-required"
+                label="Password Confirmation Required"
+                type='password' 
+                value={passwordConfirmation}
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                />
+
+
+                    <Button type="submit" sx={{ backgroundColor:'#28A4A4' }} variant="contained" disabled={password !== passwordConfirmation || !username || !email || !firstName } sx={{display: "flex", justifyContent: 'center', ml:"27.5%"}}>Create Profile</Button>
+                </form>
+                </Card>
+            </FormContainer>
         </>
     )
 }

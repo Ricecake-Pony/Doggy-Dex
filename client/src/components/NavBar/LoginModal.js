@@ -17,6 +17,7 @@ export default function LoginModal() {
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = useState("")
   const [password,setPassword] = useState("")
+  const [errors, setErrors] = useState()
   const {currentUser, setCurrentUser} = useContext(UserContext)
   const navigate = useNavigate()
   
@@ -60,34 +61,37 @@ export default function LoginModal() {
 
   return (
     <div>
-      <Button variant="filled" onClick={handleClickOpen}>
+      <Button variant="filled" sx={{fontSize: '185%', fontFamily: "Playfair", color:"#1F1A38"}} onClick={handleClickOpen}>
         Login
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText sx={{color:"#1F1A38", fontFamily: 'Mulish'}} >
             To use this website, please login here. If you do not already have an account please signup <NavLink to='/signup'>here</NavLink>
           </DialogContentText>
           <form onSubmit={login}>
-          <input 
-            id='email'
-            type='email' 
-            value= {email} 
-            onChange={ (e) => setEmail(e.target.value)} 
-            placeholder='email@gmail.com'
-            />
-        <br/>
-          <input 
-            id='password'
-            name='password' 
-            type='password' 
-            value= {password} 
-            onChange={ (e) => setPassword(e.target.value)} 
-            placeholder='password'
-            />
-            <br/>
-        <button type= 'submit' onClick={handleClose}>Login</button>
+          <TextField
+                required
+                sx={{backgroundColor: "white", mt:1, mb: 1, display: "flex", justifyContent: 'center', mr: '25%'}}
+                id="outlined-required"
+                placeholder="email"
+                label="Email Required"
+                type='email' 
+                onChange={(e) => setEmail(e.target.value)} 
+                value={email}
+                />
+        <TextField
+                required
+                sx={{backgroundColor: "white", mt:1, mb: 1, display: "flex", justifyContent: 'center', mr: '25%'}}
+                id="outlined-required"
+                label="Password Required"
+                type='password' 
+                onChange={(e) => setPassword(e.target.value)} 
+                value={password}
+                />
+            
+        <Button sx={{display: "flex", alignItems: "start"}} type= 'submit'variant="contained" onClick={handleClose}>Login</Button>
         </form>
         </DialogContent>
         <DialogActions>

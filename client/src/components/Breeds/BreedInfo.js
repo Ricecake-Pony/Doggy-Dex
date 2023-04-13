@@ -119,7 +119,7 @@ function BreedInfo () {
                 Lifespan: {breed.lifespan}
                 <br/>
                 <br/>
-                    <Button variant="contained" onClick={() => getBreedReviews()}> Click for Reviews</Button>
+                    <Button variant="contained" sx={{ backgroundColor:'#28A4A4' }} onClick={() => getBreedReviews()}> Click for Reviews</Button>
                 </Typography>
             </CardContent>
         </Card>
@@ -130,7 +130,7 @@ function BreedInfo () {
              placeholder="Enter Your Thoughts on This Breed"
              onChange={ (e) => setNote(e.target.value)}
              />
-            <Button sx={{ float: "left"}} variant="contained">Post Review</Button>
+            <Button sx={{ float: "left", backgroundColor:'#28A4A4' }} variant="contained">Post Review</Button>
          </ReviewForm>
 
              {toggleReviews ? 

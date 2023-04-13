@@ -34,7 +34,7 @@ export default function BreedCard ({breed}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="small"  onClick={ () => handleClick()}>Learn More</Button>
+        <Button variant="contained" size="small" sx={{ backgroundColor:'#28A4A4'}}  onClick={ () => handleClick()}>Learn More</Button>
       </CardActions>
     </Card>
             </div>

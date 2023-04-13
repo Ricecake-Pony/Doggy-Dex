@@ -21,7 +21,12 @@ export default function Breeds(){
     };
     
     useEffect(() => {
-        fetch("http://localhost:3001/breeds/")
+        fetch("http://localhost:3001/breeds/", {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              uid: localStorage.uid,
+            },})
         .then( r => r.json())
         .then(breedData => setBreeds(breedData))
     }, [])
@@ -45,7 +50,6 @@ export default function Breeds(){
 
     return(
     <>
-
         <TablePagination
         sx={{backgroundColor: '#F6AE2D'}}
         component="div"
@@ -55,11 +59,10 @@ export default function Breeds(){
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         />
-        
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                     {onScreen[page]?.map((breed) => (<BreedCard key={breed.id} breed={breed}/>))}
         </div>
+
     </>
     )
 }
-

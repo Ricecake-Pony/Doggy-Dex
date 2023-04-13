@@ -33,6 +33,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
         updated_review.update!(review_params)
         render json: updated_review , status: :ok
     end
+
+    def delete_breed_review
+        review = BreedReview.find(params[:review_id])
+        review.destroy
+        render json: {}, status: :ok
+    end
     
     ################################################################
     private

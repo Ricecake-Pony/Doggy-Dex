@@ -58,7 +58,7 @@ export default function NavBar({logOut}) {
                 { currentUser ? (  <Avatar alt={currentUser.first_name} src={currentUser.image_url} sx={{ width: 'auto', height: 60 }}/>) : (null) }
              </IconButton>
           </Tooltip>
-           : <LoginModal/> }
+           : <LoginModal sx={{fontSize: '300%'}}/> }
           <Menu
            className="nav-menu"
            anchorEl={anchorEl}

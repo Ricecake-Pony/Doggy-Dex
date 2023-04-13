@@ -12,7 +12,6 @@ display: flex;
 flex-direction: row;
 justify-content: end;
 align-items: end;
-
 `
 
 function UserReviewCard({ review, onUpdateReview, onDeleteReview }) {
@@ -67,7 +66,6 @@ function UserReviewCard({ review, onUpdateReview, onDeleteReview }) {
   return (
     <>
       <div>
-
           <Card sx={{ maxWidth: 270, marginLeft: 18, marginTop: 5, backgroundColor: "#F5A614" }}>
           <CardMedia
             sx={{ height: 'auto', width: 275}}
@@ -89,19 +87,18 @@ function UserReviewCard({ review, onUpdateReview, onDeleteReview }) {
                   id="note"
                   onChange={(e) => setNote(e.target.value)}
                   />
-                <Button variant="contained" size="small" onClick={updateReviews}>Save</Button>
-                <Button variant="contained" size="small" onClick={resetInput}>Cancel</Button>
+                <Button variant="contained" size="small" sx={{ backgroundColor:'#28A4A4'}} onClick={updateReviews}>Save</Button>
+                <Button variant="contained" size="small" sx={{ backgroundColor:'#28A4A4'}} onClick={resetInput}>Cancel</Button>
               </div>
             ) : (
               <div>
                 <p> Your Review was: "{review.note}" </p>
-
-                <Button variant="contained" sx={{width: "100%"}} size="small" onClick={showForm}>Edit</Button>
+                <Button variant="contained" sx={{width: "100%", backgroundColor:'#28A4A4'}} size="small" onClick={showForm}>Edit</Button>
                 
               </div>
             )}
             
-            <Button variant="contained" size="small" sx={{width: "130%"}} onClick={deleteReviews}>Delete</Button>
+            <Button variant="contained" size="small" sx={{width: "130%", backgroundColor:'#28A4A4'}} onClick={deleteReviews}>Delete</Button>
             </ButtonContainer>
           </Card>
       </div>
