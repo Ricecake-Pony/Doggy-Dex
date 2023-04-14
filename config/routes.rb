@@ -22,8 +22,7 @@ Rails.application.routes.draw do
   get "/breeds/:id", to: "breeds#breed_reviews"
   post "/breeds/:id", to: "breed_reviews#create"
  
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get "*path", to: "fallback#index", constraints: -> (req) {!req.xhr? && req.format.html?}
 end
 
 # Make a landing page of about and navbar with options like login inupts to nav to home.
