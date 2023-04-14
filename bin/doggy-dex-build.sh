@@ -10,4 +10,5 @@ set -o errexit
 # Backend build commmands
 
 bundle install
-bundle exec rake db:migrate db:seed:replant
+bundle exec rake db:migrate 
+bundle exec rake db:seed:replant
