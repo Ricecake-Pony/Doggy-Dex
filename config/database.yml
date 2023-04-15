@@ -84,3 +84,5 @@ production:
   database: doggy_dex_production
   username: doggy_dex
   password: <%= ENV["DOGGY_DEX_DATABASE_PASSWORD"] %>
+
+  url: <%= ENV["DATABASE_URL"] %>
