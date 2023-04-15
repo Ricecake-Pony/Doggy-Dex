@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+<<<<<<< HEAD
   # database: doggy_dex_production
   # username: doggy_dex
   # password: <%= ENV["DOGGY_DEX_DATABASE_PASSWORD"] %>
@@ -90,3 +91,10 @@ production:
 
 # ./bin/doggy-dex-build.sh
 # bundle exec puma -C config/puma.rb
+=======
+  database: doggy_dex_production
+  username: doggy_dex
+  password: <%= ENV["DOGGY_DEX_DATABASE_PASSWORD"] %>
+
+  url: <%= ENV["DATABASE_URL"] %>
+>>>>>>> deployment2
