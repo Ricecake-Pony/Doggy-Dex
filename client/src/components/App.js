@@ -12,7 +12,7 @@ import { UserContext } from '../contexts/UserContext';
 import DogProducts from './NavBar/DogProducts';
 import { GlobalStyles } from '@mui/material';
 
-const baseURL= "http://localhost:3001/"
+const baseURL= "http://localhost:3000/"
 const signUpURL = baseURL + 'signup';
 const myProfileURL = baseURL + 'my_profile';
 const breedsURL = baseURL + 'breeds';

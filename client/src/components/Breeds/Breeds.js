@@ -21,7 +21,7 @@ export default function Breeds(){
     };
     
     useEffect(() => {
-        fetch("http://localhost:3001/breeds/", {
+        fetch("http://localhost:3000/breeds/", {
             method: "GET",
             headers: {
               "Content-type": "application/json",
