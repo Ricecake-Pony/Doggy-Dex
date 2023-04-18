@@ -96,5 +96,9 @@ production:
   username: doggy_dex
   password: <%= ENV["DOGGY_DEX_DATABASE_PASSWORD"] %>
 
+<<<<<<< HEAD
   url: <%= ENV["DATABASE_URL"] %>
 >>>>>>> deployment2
+=======
+  url: <% ENV["DATABASE_URL"] %>
+>>>>>>> deployment3

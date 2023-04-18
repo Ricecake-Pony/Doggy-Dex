@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 
-const baseURL= "http://localhost:3001/"
+const baseURL= "http://localhost:3000/"
 const loginURL = baseURL + 'login';
 
 export default function LoginModal() {
