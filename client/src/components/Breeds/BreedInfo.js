@@ -54,7 +54,12 @@ function BreedInfo () {
 
     
       useEffect(() => {
-        fetch("http://localhost:3001/breeds/")
+        fetch("http://localhost:3001/breeds/", {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              uid: localStorage.uid,
+            },})
         .then( r => r.json())
         .then(breedData => {
             
@@ -64,7 +69,12 @@ function BreedInfo () {
     }, [breedId])
     
     function getBreedReviews(){
-        fetch(`http://localhost:3001/breeds/${breed.id}`)
+        fetch(`http://localhost:3001/breeds/${breed.id}`, {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              uid: localStorage.uid,
+            },})
         .then(r => r.json())
         .then(breedReviews => 
             setReviews(breedReviews.breed_reviews))
@@ -89,6 +99,7 @@ function BreedInfo () {
                 body: JSON.stringify(reviewInfo)
             })
             resetForm()
+            console.log("I submitted!")
         }
         
         return(
@@ -130,72 +141,44 @@ function BreedInfo () {
              placeholder="Enter Your Thoughts on This Breed"
              onChange={ (e) => setNote(e.target.value)}
              />
-            <Button sx={{ float: "left", backgroundColor:'#28A4A4' }} variant="contained">Post Review</Button>
+            <Button sx={{ float: "left", backgroundColor:'#28A4A4' }} variant="contained" onClick={submitReviewForm} >Post Review</Button>
          </ReviewForm>
 
-             {toggleReviews ? 
-             <ReviewsContainer>{reviews.map((review) => (
-                 
-                    <Box component="div" 
-                    sx={{ width: '48%', 
-                    flex: '0 0 auto', 
-                    mt: 3 }} 
-                    key={review.id}
-                    >
-                        
-                        <Card 
-                        variant="outlined" 
-                        sx={{
-                            backgroundColor: "#F5A614",
-                            mb: 1.5, 
-                            borderBlockColor: 'white',
-                            mr: '35%',
-                            ml:'10%' }}
+             {toggleReviews ? (
+                 reviews.length > 0 ? (
+                    <ReviewsContainer>
+                      {reviews.map((review) => (
+                        <Box
+                          component="div"
+                          sx={{ width: '48%', flex: '0 0 auto', mt: 3 }}
+                          key={review.id}
                         >
-                            <Typography 
-                                sx={{ color:"#1F1A38", fontFamily: 'Lato'}}>
-                                    <p>{review.note}</p>
-                                    <p>By: {review.user.username}</p>
-                            <img src={review.user.image_url} width={150} height={'auto'}/>
+                          <Card
+                            variant="outlined"
+                            sx={{
+                              backgroundColor: '#F5A614',
+                              mb: 1.5,
+                              borderBlockColor: 'white',
+                              mr: '35%',
+                              ml: '10%',
+                            }}
+                          >
+                            <Typography sx={{ color: '#1F1A38', fontFamily: 'Mulish' }}>
+                              {review.note}
                             </Typography>
-                        </Card>
-                    </Box>    ))}
-             </ReviewsContainer> 
-             : <></>}
-
+                            <Typography sx={{ color: '#1F1A38', fontFamily: 'Lato' }}>
+                              Posted by {review.user.username}
+                            </Typography>
+                          </Card>
+                        </Box>
+                      ))}
+                    </ReviewsContainer>
+                  ) : (
+                    <Card sx={{ maxWidth: '15%', margin: 5, backgroundColor: "#F5A614", marginLeft: '25%'}}>No reviews yet.</Card>
+                  )
+                ) : null}
         </>
     );
 }
 
 export default BreedInfo;
-
-{/* <StyledForm onSubmit={this.onSubmit}>
-<StyledInput
-required
- type="email"
- name="email"
- placeholder="Email"
- data-testid="login-input"
- onChange={this.onChange}
- />
- <Button type="submit">Log in</Button>
-</StyledForm> */}
-{/* <Card>
-<Image breed = {breed} src= {breed.image_url}> 
-  </Image>
-  <br/>
-{breed.name}
-    <ul>
-        Temperament: {breed.temperament}
-        <br/>
-        Breed group: {breed.breed_group}
-        <br/>
-        Bred for: {breed.bred_for}
-        <br/>
-        Average Height: {breed.height_imperial} ({breed.height_metric})
-        <br/>
-        Average Weight: {breed.weight_imperial}  ({breed.weight_metric})
-        <br/>
-        Lifespan: {breed.lifespan}
-    </ul>
-</Card> */}
